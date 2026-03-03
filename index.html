@@ -1,0 +1,3336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Æther - The Ultimate Arcane SaaS Platform for the Modern World." />
+    <meta name="author" content="Your Name / University Assignment" />
+    <title>Æther — Command the Unknown</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+
+    <style>
+        /* ====================================================================
+           1. CSS CUSTOM PROPERTIES (ROOT VARIABLES) - DARK MODE DEFAULT
+        ==================================================================== */
+        :root {
+            /* Background Colors */
+            --void: #04030a;        /* Deepest background */
+            --abyss: #080614;       /* Secondary background */
+            --stone: #120f1e;       /* Card background */
+            --rune: #1c1730;        /* Highlight background */
+            
+            /* Brand Colors */
+            --gold: #c9a84c;        /* Primary brand color */
+            --gold-light: #f0d080;  /* Brand highlight */
+            --gold-dim: #7a6028;    /* Brand shadow/dim */
+            --ember: #e85d20;       /* Alert/Danger color */
+            --arcane: #9b4dca;      /* Secondary brand accent */
+            --ice: #7ecfea;         /* Info accent */
+            
+            /* Overlays */
+            --mist: rgba(201, 168, 76, 0.08);
+            
+            /* Typography */
+            --serif-display: 'Cinzel Decorative', serif;
+            --serif-body: 'Cinzel', serif;
+            --prose: 'Crimson Pro', serif;
+        }
+
+        /* ====================================================================
+           2. LIGHT MODE OVERRIDES (VIBRANT GOLD CONFIGURED)
+        ==================================================================== */
+        [data-theme="light"] {
+            /* Backgrounds */
+            --void: #f9f6f0;      /* Parchment base */
+            --abyss: #f0ebd8;     /* Darker parchment */
+            --stone: #e6dfcb;     /* Light card base */
+            --rune: #d6ccb3;      /* Light card hover */
+            
+            /* UPDATED VIBRANT GOLD FOR LIGHT MODE 
+               These hex codes are calibrated to stand out brightly 
+               against the white/parchment background.
+            */
+            --gold: #d97b06;      /* Vibrant Amber-Gold */
+            --gold-light: #ea961f;/* Bright Amber */
+            --gold-dim: #a15805;  /* Deep Bronze for contrast */
+        }
+
+        /* Base Body Typography for Light Mode */
+        [data-theme="light"] body {
+            color: #3a3226;
+        }
+
+        /* Main Headings & Big Text */
+        [data-theme="light"] .hero-title, 
+        [data-theme="light"] .section-title-myth, 
+        [data-theme="light"] .tier-price,
+        [data-theme="light"] .cta-title,
+        [data-theme="light"] .codex-stat-num,
+        [data-theme="light"] .modal-title,
+        [data-theme="light"] .footer-title,
+        [data-theme="light"] .accordion-button { 
+            color: #110d0a !important; 
+            text-shadow: none; 
+            -webkit-text-fill-color: #110d0a; 
+        }
+
+        /* The Gold Text Gradient - Tweaked to be ultra clear in Light Mode */
+        [data-theme="light"] .gold-text, 
+        [data-theme="light"] .hero-title .gold-text {
+            background: linear-gradient(135deg, #a15805, #ea961f, #d97b06);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent !important;
+            font-weight: 700;
+        }
+
+        /* Subtitles, Paragraphs, & Descriptions */
+        [data-theme="light"] .hero-subtitle, 
+        [data-theme="light"] .cta-subtitle,
+        [data-theme="light"] .feature-text, 
+        [data-theme="light"] .scroll-text, 
+        [data-theme="light"] .testament-text,
+        [data-theme="light"] .mega-desc,
+        [data-theme="light"] .tier-feature,
+        [data-theme="light"] .tier-desc,
+        [data-theme="light"] .testament-role,
+        [data-theme="light"] .step-desc,
+        [data-theme="light"] .accordion-body { 
+            color: #4a4031 !important; 
+            font-weight: 400;
+        }
+
+        /* Card Titles, Names, & Labels */
+        [data-theme="light"] .feature-title,
+        [data-theme="light"] .mega-title,
+        [data-theme="light"] .tier-name,
+        [data-theme="light"] .testament-name,
+        [data-theme="light"] .footer-heading,
+        [data-theme="light"] .step-title {
+            color: #2a2218 !important;
+            font-weight: 700;
+        }
+
+        /* Navigation Overrides */
+        [data-theme="light"] #mainNav { 
+            background: rgba(249, 246, 240, 0.95); 
+            border-bottom-color: rgba(217, 123, 6, 0.2); 
+        }
+        [data-theme="light"] .nav-link { 
+            color: #3a3226 !important; 
+            font-weight: 600; 
+        }
+        [data-theme="light"] .nav-link:hover { 
+            color: var(--gold) !important; 
+        }
+
+        /* Mega Menu Overrides */
+        [data-theme="light"] .mega-menu { 
+            background: rgba(249, 246, 240, 0.98) !important; 
+            border-color: rgba(217, 123, 6, 0.3) !important; 
+        }
+        [data-theme="light"] .mega-item:hover { 
+            background: rgba(217, 123, 6, 0.1) !important; 
+        }
+        [data-theme="light"] .mega-icon { 
+            background: rgba(217, 123, 6, 0.1); 
+            border-color: rgba(217, 123, 6, 0.3); 
+        }
+
+        /* Card Backgrounds */
+        [data-theme="light"] .feature-card, 
+        [data-theme="light"] .tier-card, 
+        [data-theme="light"] .testament-card, 
+        [data-theme="light"] .codex-frame,
+        [data-theme="light"] .auth-modal,
+        [data-theme="light"] .integration-card,
+        [data-theme="light"] .table-mythic { 
+            background: linear-gradient(145deg, var(--void), var(--abyss)); 
+            border-color: rgba(217, 123, 6, 0.3); 
+        }
+
+        /* Floating Elements & Shards */
+        [data-theme="light"] .data-shard { 
+            background: rgba(249, 246, 240, 0.95); 
+            border-color: rgba(217, 123, 6, 0.4); 
+            color: #3a3226; 
+        }
+        [data-theme="light"] .data-shard .val { 
+            color: #110d0a; 
+        }
+
+        /* Buttons & Socials */
+        [data-theme="light"] .btn-ghost-myth { 
+            color: var(--gold); 
+            border-color: var(--gold); 
+        }
+        [data-theme="light"] .btn-ghost-myth:hover { 
+            background: rgba(217, 123, 6, 0.1); 
+            color: #3a2a06; 
+        }
+        [data-theme="light"] .social-myth { 
+            color: #4a4031; 
+            background: rgba(217, 123, 6, 0.05); 
+            border-color: rgba(217, 123, 6, 0.3); 
+        }
+        [data-theme="light"] .social-myth:hover { 
+            color: var(--gold); 
+            border-color: var(--gold); 
+            background: rgba(217, 123, 6, 0.1); 
+        }
+
+        /* Accents */
+        [data-theme="light"] .eyebrow { 
+            color: var(--gold); 
+            font-weight: 700; 
+        }
+        [data-theme="light"] .scroll-rune, 
+        [data-theme="light"] .stars-myth { 
+            color: var(--gold); 
+        }
+        [data-theme="light"] .footer-link { 
+            color: #4a4031; 
+        }
+        [data-theme="light"] .footer-link:hover { 
+            color: var(--gold); 
+        }
+
+        /* Light Mode specific Auth overrides */
+        [data-theme="light"] .myth-input { 
+            background: #fff; 
+            border-color: rgba(217, 123, 6, 0.4); 
+            color: #110d0a; 
+        }
+        [data-theme="light"] .myth-input::placeholder { 
+            color: #8c8273; 
+        }
+        [data-theme="light"] .myth-input:focus { 
+            background: #fff; 
+            border-color: var(--gold); 
+            box-shadow: 0 0 0 3px rgba(217, 123, 6, 0.1); 
+            color: #110d0a; 
+        }
+        [data-theme="light"] .auth-tabs .nav-link { 
+            color: #8c8273; 
+        }
+        [data-theme="light"] .auth-tabs .nav-link.active { 
+            color: var(--gold); 
+            border-bottom-color: var(--gold); 
+        }
+        [data-theme="light"] .btn-close-white { 
+            filter: invert(1); 
+        }
+        [data-theme="light"] .btn-google { 
+            border-color: rgba(217, 123, 6, 0.4); 
+            color: #4a4031; 
+        }
+        [data-theme="light"] .btn-google:hover { 
+            background: rgba(217, 123, 6, 0.1); 
+            border-color: var(--gold); 
+            color: var(--gold); 
+        }
+        [data-theme="light"] .auth-divider { 
+            color: #8c8273; 
+        }
+        [data-theme="light"] .auth-divider::before, 
+        [data-theme="light"] .auth-divider::after { 
+            border-bottom-color: rgba(217, 123, 6, 0.2); 
+        }
+
+        /* Light Mode Table Overrides */
+        [data-theme="light"] .table-mythic th,
+        [data-theme="light"] .table-mythic td {
+            border-color: rgba(217, 123, 6, 0.2) !important;
+            color: #4a4031;
+        }
+        [data-theme="light"] .table-mythic thead th {
+            color: #110d0a;
+            background: rgba(249, 246, 240, 0.95);
+        }
+
+        /* Light Mode Accordion Overrides */
+        [data-theme="light"] .accordion-item {
+            background-color: var(--stone);
+            border-color: rgba(217, 123, 6, 0.2);
+        }
+        [data-theme="light"] .accordion-button {
+            background-color: transparent;
+        }
+        [data-theme="light"] .accordion-button:not(.collapsed) {
+            background-color: rgba(217, 123, 6, 0.05);
+            color: var(--gold) !important;
+        }
+
+        /* ====================================================================
+           3. BASE ELEMENT STYLING
+        ==================================================================== */
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0;
+        }
+        
+        html { 
+            scroll-behavior: smooth; 
+            overflow-x: hidden;
+        }
+
+        body {
+            background: var(--void);
+            color: #c8c0a8;
+            font-family: var(--prose);
+            font-size: 1.05rem;
+            font-weight: 300;
+            overflow-x: hidden;
+            cursor: none; /* Required for custom cursor */
+            -webkit-transition: background 0.5s ease, color 0.5s ease;
+            -moz-transition: background 0.5s ease, color 0.5s ease;
+            transition: background 0.5s ease, color 0.5s ease;
+            position: relative;
+        }
+
+        /* Text Selection */
+        ::selection {
+            background: var(--gold-dim);
+            color: #fff;
+        }
+        ::-moz-selection {
+            background: var(--gold-dim);
+            color: #fff;
+        }
+
+        /* Global Grain Overlay to give that ancient mystical feel */
+        body::before {
+            content: '';
+            position: fixed; 
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        /* Utility class to keep content above the particle canvas */
+        .above { 
+            position: relative; 
+            z-index: 2; 
+        }
+
+        /* ====================================================================
+           4. CUSTOM CURSOR
+        ==================================================================== */
+        #cursor {
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            background: var(--gold); 
+            position: fixed; 
+            top: 0; 
+            left: 0;
+            pointer-events: none; 
+            z-index: 9999; 
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-transition: transform 0.15s ease, background 0.2s;
+            -moz-transition: transform 0.15s ease, background 0.2s;
+            transition: transform 0.15s ease, background 0.2s;
+            mix-blend-mode: difference;
+        }
+
+        #cursor-ring {
+            width: 36px; 
+            height: 36px; 
+            border-radius: 50%; 
+            border: 1px solid var(--gold); 
+            position: fixed; 
+            top: 0; 
+            left: 0;
+            pointer-events: none; 
+            z-index: 9998; 
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            -moz-transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.5;
+        }
+
+        /* ====================================================================
+           5. CANVAS PARTICLES
+        ==================================================================== */
+        #cosmos { 
+            position: fixed; 
+            inset: 0; 
+            pointer-events: none; 
+            z-index: 0; 
+        }
+
+        /* ====================================================================
+           6. TYPOGRAPHY & DECORATIVE UTILITIES
+        ==================================================================== */
+        .rune-border { 
+            border: 1px solid rgba(201, 168, 76, 0.2); 
+            -webkit-border-image: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent) 1;
+            -moz-border-image: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent) 1;
+            border-image: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent) 1; 
+            position: relative; 
+        }
+
+        .gold-text { 
+            background: linear-gradient(135deg, var(--gold-dim), var(--gold-light), var(--gold), var(--gold-dim)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+        }
+
+        /* Divider Ornament */
+        .ornament { 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; 
+            justify-content: center; 
+            margin: 1.5rem auto; 
+        }
+        .ornament::before, 
+        .ornament::after { 
+            content: ''; 
+            flex: 1; 
+            max-width: 120px; 
+            height: 1px; 
+            background: linear-gradient(90deg, transparent, var(--gold-dim)); 
+        }
+        .ornament::after { 
+            background: linear-gradient(90deg, var(--gold-dim), transparent); 
+        }
+        .ornament-symbol { 
+            color: var(--gold); 
+            font-size: 0.9rem; 
+            letter-spacing: 0.3em; 
+            font-family: var(--serif-body); 
+            opacity: 0.8; 
+        }
+
+        .eyebrow { 
+            font-family: var(--serif-body); 
+            font-size: 0.65rem; 
+            letter-spacing: 0.25em; 
+            text-transform: uppercase; 
+            color: var(--gold); 
+            opacity: 0.8; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+
+        /* ====================================================================
+           7. NAVIGATION BAR & MEGA MENU
+        ==================================================================== */
+        #mainNav { 
+            background: rgba(4, 3, 10, 0.85); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); 
+            border-bottom: 1px solid rgba(201, 168, 76, 0.1); 
+            padding: 1.1rem 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            -webkit-transition: all 0.4s;
+            transition: all 0.4s; 
+        }
+
+        #mainNav.lit { 
+            border-bottom-color: rgba(201, 168, 76, 0.3); 
+            -webkit-box-shadow: 0 0 60px rgba(201, 168, 76, 0.04);
+            box-shadow: 0 0 60px rgba(201, 168, 76, 0.04); 
+        }
+
+        .brand-name { 
+            font-family: var(--serif-display); 
+            font-size: 1.4rem; 
+            background: linear-gradient(135deg, var(--gold-dim), var(--gold-light), var(--gold)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            letter-spacing: 0.08em; 
+            text-decoration: none; 
+        }
+
+        .nav-link { 
+            font-family: var(--serif-body); 
+            font-size: 0.72rem; 
+            letter-spacing: 0.18em; 
+            text-transform: uppercase; 
+            color: rgba(200, 192, 168, 0.65) !important; 
+            -webkit-transition: color 0.3s;
+            transition: color 0.3s; 
+            padding: 0.5rem 1.1rem !important; 
+            position: relative; 
+            cursor: none; 
+        }
+        
+        .nav-link::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 2px; 
+            left: 50%; 
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%); 
+            width: 0; 
+            height: 1px; 
+            background: var(--gold); 
+            -webkit-transition: width 0.35s ease;
+            transition: width 0.35s ease; 
+        }
+        
+        .nav-link:hover { 
+            color: var(--gold-light) !important; 
+        }
+        
+        .nav-link:hover::after { 
+            width: 60%; 
+        }
+
+        /* Mega Menu Core Logic */
+        @media (min-width: 992px) { 
+            .mega-dropdown:hover .dropdown-menu { 
+                display: block; 
+            } 
+        }
+        
+        .mega-dropdown { 
+            position: static !important; 
+        }
+        
+        .mega-menu { 
+            width: 100vw; 
+            max-width: 800px; 
+            left: 50% !important; 
+            -webkit-transform: translateX(-50%) !important;
+            transform: translateX(-50%) !important; 
+            background: rgba(4, 3, 10, 0.95); 
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(201, 168, 76, 0.2); 
+            border-radius: 4px; 
+            padding: 2rem; 
+            margin-top: 1rem !important; 
+            -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); 
+            -webkit-transition: background 0.5s, border-color 0.5s;
+            transition: background 0.5s, border-color 0.5s; 
+        }
+        
+        .mega-item { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 1rem; 
+            padding: 1rem; 
+            text-decoration: none; 
+            border-radius: 4px; 
+            -webkit-transition: background 0.3s;
+            transition: background 0.3s; 
+            cursor: none; 
+        }
+        
+        .mega-item:hover { 
+            background: rgba(201, 168, 76, 0.08); 
+        }
+        
+        .mega-icon { 
+            width: 40px; 
+            height: 40px; 
+            background: rgba(201, 168, 76, 0.1); 
+            border-radius: 4px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--gold); 
+            font-size: 1.2rem; 
+            border: 1px solid rgba(201, 168, 76, 0.2); 
+            -webkit-transition: background 0.5s, border-color 0.5s;
+            transition: background 0.5s, border-color 0.5s; 
+        }
+        
+        .mega-title { 
+            color: var(--gold-light); 
+            font-family: var(--serif-body); 
+            font-size: 0.75rem; 
+            letter-spacing: 0.15em; 
+            text-transform: uppercase; 
+            margin-bottom: 0.3rem; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+        
+        .mega-desc { 
+            color: rgba(200, 192, 168, 0.6); 
+            font-size: 0.85rem; 
+            margin: 0; 
+            line-height: 1.5; 
+            font-family: var(--prose); 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+
+        /* Navbar Buttons */
+        .btn-arcane { 
+            font-family: var(--serif-body); 
+            font-size: 0.68rem; 
+            letter-spacing: 0.2em; 
+            text-transform: uppercase; 
+            color: var(--void) !important; 
+            background: linear-gradient(135deg, var(--gold-dim), var(--gold), var(--gold-light), var(--gold)); 
+            background-size: 200% 200%; 
+            border: none; 
+            padding: 0.6rem 1.6rem; 
+            -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); 
+            cursor: none; 
+            -webkit-transition: background-position 0.4s, box-shadow 0.3s;
+            transition: background-position 0.4s, box-shadow 0.3s; 
+            -webkit-animation: goldShimmer 4s ease infinite;
+            animation: goldShimmer 4s ease infinite; 
+            text-decoration: none; 
+            display: inline-block; 
+        }
+        .btn-arcane:hover { 
+            -webkit-box-shadow: 0 0 30px rgba(201, 168, 76, 0.4), 0 0 60px rgba(201, 168, 76, 0.15);
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.4), 0 0 60px rgba(201, 168, 76, 0.15); 
+        }
+
+        /* ====================================================================
+           8. BUTTONS
+        ==================================================================== */
+        .btn-primary-myth { 
+            font-family: var(--serif-body); 
+            font-size: 0.72rem; 
+            letter-spacing: 0.22em; 
+            text-transform: uppercase; 
+            color: var(--void); 
+            background: linear-gradient(135deg, var(--gold-dim), var(--gold-light)); 
+            border: none; 
+            padding: 1rem 2.6rem; 
+            -webkit-clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+            clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%); 
+            cursor: none; 
+            -webkit-transition: box-shadow 0.3s, transform 0.3s;
+            transition: box-shadow 0.3s, transform 0.3s; 
+            text-decoration: none; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        .btn-primary-myth::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.25) 50%, transparent 100%); 
+            -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); 
+            -webkit-transition: transform 0.5s ease;
+            transition: transform 0.5s ease; 
+        }
+        
+        .btn-primary-myth:hover::before { 
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%); 
+        }
+        
+        .btn-primary-myth:hover { 
+            -webkit-box-shadow: 0 0 40px rgba(201, 168, 76, 0.5), 0 0 80px rgba(201, 168, 76, 0.2);
+            box-shadow: 0 0 40px rgba(201, 168, 76, 0.5), 0 0 80px rgba(201, 168, 76, 0.2); 
+            -webkit-transform: translateY(-2px);
+            transform: translateY(-2px); 
+            color: var(--void); 
+        }
+
+        .btn-ghost-myth { 
+            font-family: var(--serif-body); 
+            font-size: 0.72rem; 
+            letter-spacing: 0.22em; 
+            text-transform: uppercase; 
+            color: var(--gold); 
+            background: transparent; 
+            border: 1px solid rgba(201, 168, 76, 0.35); 
+            padding: 1rem 2.6rem; 
+            -webkit-clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+            clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%); 
+            cursor: none; 
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s; 
+            text-decoration: none; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        .btn-ghost-myth:hover { 
+            border-color: var(--gold); 
+            background: rgba(201, 168, 76, 0.08); 
+            color: var(--gold-light); 
+            -webkit-box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.2); 
+        }
+
+        /* Google Outline Button (For Modal) */
+        .btn-google {
+            background: transparent; 
+            border: 1px solid rgba(201, 168, 76, 0.3); 
+            color: var(--gold-light);
+            font-family: var(--serif-body); 
+            font-size: 0.75rem; 
+            letter-spacing: 0.15em; 
+            text-transform: uppercase;
+            padding: 0.85rem; 
+            border-radius: 2px; 
+            cursor: none; 
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        
+        .btn-google:hover { 
+            background: rgba(201, 168, 76, 0.08); 
+            border-color: var(--gold); 
+            color: var(--gold); 
+        }
+
+        /* ====================================================================
+           9. HERO SECTION & ANIMATIONS
+        ==================================================================== */
+        #hero { 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            position: relative; 
+            overflow: hidden; 
+            padding: 6rem 0; 
+        }
+        
+        #hero::before { 
+            content: ''; 
+            position: absolute; 
+            top: 40%; 
+            left: 50%; 
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); 
+            width: 900px; 
+            height: 900px; 
+            background: radial-gradient(ellipse, rgba(201, 168, 76, 0.06) 0%, rgba(155, 77, 202, 0.04) 40%, transparent 70%); 
+            pointer-events: none; 
+            -webkit-animation: breathe 8s ease-in-out infinite;
+            animation: breathe 8s ease-in-out infinite; 
+        }
+
+        @keyframes breathe { 
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); } 
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } 
+        }
+        
+        @-webkit-keyframes breathe { 
+            0%, 100% { opacity: 0.6; -webkit-transform: translate(-50%, -50%) scale(1); } 
+            50% { opacity: 1; -webkit-transform: translate(-50%, -50%) scale(1.1); } 
+        }
+
+        .arcane-circle { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); 
+            width: min(700px, 90vw); 
+            height: min(700px, 90vw); 
+            opacity: 0.3; 
+            -webkit-animation: spinSlow 60s linear infinite;
+            animation: spinSlow 60s linear infinite; 
+            pointer-events: none; 
+        }
+        
+        @keyframes spinSlow { 
+            from { transform: translate(-50%, -50%) rotate(0deg); } 
+            to { transform: translate(-50%, -50%) rotate(360deg); } 
+        }
+        
+        @-webkit-keyframes spinSlow { 
+            from { -webkit-transform: translate(-50%, -50%) rotate(0deg); } 
+            to { -webkit-transform: translate(-50%, -50%) rotate(360deg); } 
+        }
+
+        .arcane-circle-inner { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); 
+            width: min(450px, 60vw); 
+            height: min(450px, 60vw); 
+            opacity: 0.4; 
+            -webkit-animation: spinSlow 40s linear infinite reverse;
+            animation: spinSlow 40s linear infinite reverse; 
+            pointer-events: none; 
+        }
+
+        .hero-sigil { 
+            width: 90px; 
+            height: 90px; 
+            margin: 0 auto 2rem; 
+            position: relative; 
+        }
+        
+        .hero-sigil svg { 
+            width: 100%; 
+            height: 100%; 
+            -webkit-filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.5));
+            filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.5)); 
+            -webkit-animation: sigilPulse 3s ease-in-out infinite;
+            animation: sigilPulse 3s ease-in-out infinite; 
+        }
+        
+        @keyframes sigilPulse { 
+            0%, 100% { filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.5)); } 
+            50% { filter: drop-shadow(0 0 28px rgba(201, 168, 76, 0.9)); } 
+        }
+
+        .hero-title { 
+            font-family: var(--serif-display); 
+            font-size: clamp(2.4rem, 6vw, 5rem); 
+            line-height: 1.08; 
+            letter-spacing: 0.04em; 
+            color: #fff; 
+            text-shadow: 0 0 80px rgba(201, 168, 76, 0.2); 
+            margin-bottom: 1.5rem; 
+            -webkit-transition: color 0.5s, text-shadow 0.5s;
+            transition: color 0.5s, text-shadow 0.5s; 
+        }
+        
+        .hero-subtitle { 
+            font-family: var(--prose); 
+            font-size: clamp(1rem, 2vw, 1.2rem); 
+            font-weight: 300; 
+            font-style: italic; 
+            color: rgba(200, 192, 168, 0.7); 
+            max-width: 540px; 
+            margin: 0 auto 3rem; 
+            line-height: 1.8; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+
+        /* Hero Right Column Artifact */
+        .artifact-frame { 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        .artifact-orb { 
+            width: min(360px, 80vw); 
+            height: min(360px, 80vw); 
+            border-radius: 50%; 
+            background: radial-gradient(ellipse at 35% 35%, rgba(201, 168, 76, 0.18), rgba(155, 77, 202, 0.12), rgba(4, 3, 10, 0.9) 70%); 
+            border: 1px solid rgba(201, 168, 76, 0.2); 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            -webkit-animation: orbFloat 6s ease-in-out infinite;
+            animation: orbFloat 6s ease-in-out infinite; 
+            -webkit-box-shadow: 0 0 60px rgba(201, 168, 76, 0.08), inset 0 0 60px rgba(155, 77, 202, 0.06);
+            box-shadow: 0 0 60px rgba(201, 168, 76, 0.08), inset 0 0 60px rgba(155, 77, 202, 0.06); 
+        }
+        
+        @keyframes orbFloat { 
+            0%, 100% { transform: translateY(0) rotate(0deg); } 
+            33% { transform: translateY(-16px) rotate(1deg); } 
+            66% { transform: translateY(-8px) rotate(-1deg); } 
+        }
+
+        .orb-ring { 
+            position: absolute; 
+            border-radius: 50%; 
+            border: 1px solid rgba(201, 168, 76, 0.15); 
+            -webkit-animation: orbRingSpin 20s linear infinite;
+            animation: orbRingSpin 20s linear infinite; 
+        }
+        
+        .orb-ring:nth-child(1) { 
+            width: 110%; 
+            height: 110%; 
+            border-style: dashed; 
+            animation-duration: 25s; 
+            -webkit-animation-duration: 25s;
+        }
+        
+        .orb-ring:nth-child(2) { 
+            width: 125%; 
+            height: 125%; 
+            border-color: rgba(155, 77, 202, 0.12); 
+            animation-duration: 35s; 
+            -webkit-animation-duration: 35s;
+            animation-direction: reverse; 
+            -webkit-animation-direction: reverse;
+        }
+        
+        @keyframes orbRingSpin { 
+            from { transform: rotate(0deg); } 
+            to { transform: rotate(360deg); } 
+        }
+        
+        .orb-rune { 
+            font-family: var(--serif-display); 
+            font-size: 4rem; 
+            background: linear-gradient(135deg, var(--gold-dim), var(--gold-light)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            -webkit-filter: drop-shadow(0 0 20px rgba(201, 168, 76, 0.5));
+            filter: drop-shadow(0 0 20px rgba(201, 168, 76, 0.5)); 
+        }
+
+        /* Floating Shards in Hero */
+        .data-shard { 
+            position: absolute; 
+            background: rgba(8, 6, 20, 0.85); 
+            border: 1px solid rgba(201, 168, 76, 0.2); 
+            border-radius: 6px; 
+            padding: 0.7rem 1rem; 
+            font-family: var(--serif-body); 
+            font-size: 0.6rem; 
+            letter-spacing: 0.12em; 
+            color: var(--gold); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            white-space: nowrap; 
+            -webkit-transition: background 0.5s, color 0.5s, border-color 0.5s;
+            transition: background 0.5s, color 0.5s, border-color 0.5s; 
+        }
+        
+        .data-shard .val { 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: var(--gold-light); 
+            display: block; 
+            line-height: 1.2; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+        
+        .shard-1 { 
+            top: 8%; 
+            right: -5%; 
+            -webkit-animation: shardFloat 5s ease-in-out infinite;
+            animation: shardFloat 5s ease-in-out infinite; 
+        }
+        .shard-2 { 
+            bottom: 15%; 
+            left: -10%; 
+            -webkit-animation: shardFloat 7s ease-in-out infinite 0.5s;
+            animation: shardFloat 7s ease-in-out infinite 0.5s; 
+        }
+        .shard-3 { 
+            top: 55%; 
+            right: -12%; 
+            -webkit-animation: shardFloat 6s ease-in-out infinite 1s;
+            animation: shardFloat 6s ease-in-out infinite 1s; 
+        }
+        
+        @keyframes shardFloat { 
+            0%, 100% { transform: translateY(0); } 
+            50% { transform: translateY(-10px); } 
+        }
+
+        /* ====================================================================
+           10. CARD SHARED STYLES (Features, Pricing, Teams, Info)
+        ==================================================================== */
+        .feature-card, 
+        .tier-card, 
+        .testament-card, 
+        .codex-frame,
+        .integration-card { 
+            background: linear-gradient(145deg, var(--stone), var(--rune)); 
+            border: 1px solid rgba(201, 168, 76, 0.1); 
+            border-radius: 2px; 
+            position: relative; 
+            -webkit-transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s, background 0.5s;
+            transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s, background 0.5s; 
+            cursor: none; 
+        }
+
+        #features, 
+        #pricing,
+        #how-it-works,
+        #integrations,
+        #comparison,
+        #faq { 
+            padding: 7rem 0; 
+            position: relative; 
+        }
+        
+        /* Section Separators */
+        #features::before, 
+        #pricing::before,
+        #how-it-works::before,
+        #integrations::before,
+        #comparison::before,
+        #faq::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            height: 1px; 
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent); 
+        }
+
+        .feature-card { 
+            padding: 2.2rem 2rem; 
+            height: 100%; 
+            overflow: hidden; 
+        }
+        
+        /* Corner Borders */
+        .feature-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 24px; 
+            height: 24px; 
+            border-top: 2px solid var(--gold); 
+            border-left: 2px solid var(--gold); 
+            opacity: 0.4; 
+            -webkit-transition: opacity 0.4s;
+            transition: opacity 0.4s; 
+        }
+        
+        .feature-card::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            right: 0; 
+            width: 24px; 
+            height: 24px; 
+            border-bottom: 2px solid var(--gold); 
+            border-right: 2px solid var(--gold); 
+            opacity: 0.4; 
+            -webkit-transition: opacity 0.4s;
+            transition: opacity 0.4s; 
+        }
+        
+        .feature-card:hover,
+        .integration-card:hover { 
+            border-color: rgba(201, 168, 76, 0.4); 
+            -webkit-transform: translateY(-6px);
+            transform: translateY(-6px); 
+            -webkit-box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(201, 168, 76, 0.07);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(201, 168, 76, 0.07); 
+        }
+        
+        .feature-card:hover::before, 
+        .feature-card:hover::after { 
+            opacity: 1; 
+        }
+
+        .feature-icon-wrap { 
+            width: 56px; 
+            height: 56px; 
+            position: relative; 
+            margin-bottom: 1.5rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        .feature-icon-wrap::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.15), rgba(155, 77, 202, 0.1)); 
+            -webkit-clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); 
+            -webkit-transition: background 0.4s;
+            transition: background 0.4s; 
+        }
+        
+        .feature-card:hover .feature-icon-wrap::before { 
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.3), rgba(155, 77, 202, 0.2)); 
+        }
+        
+        .feature-icon-wrap i { 
+            font-size: 1.5rem; 
+            color: var(--gold); 
+            position: relative; 
+            z-index: 1; 
+            -webkit-transition: filter 0.4s;
+            transition: filter 0.4s; 
+        }
+        
+        .feature-card:hover .feature-icon-wrap i { 
+            -webkit-filter: drop-shadow(0 0 8px rgba(201, 168, 76, 0.8));
+            filter: drop-shadow(0 0 8px rgba(201, 168, 76, 0.8)); 
+        }
+
+        .feature-title { 
+            font-family: var(--serif-body); 
+            font-size: 0.85rem; 
+            letter-spacing: 0.12em; 
+            text-transform: uppercase; 
+            color: var(--gold-light); 
+            margin-bottom: 0.8rem; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+        
+        .feature-text { 
+            font-size: 0.95rem; 
+            line-height: 1.75; 
+            color: rgba(200, 192, 168, 0.65); 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+
+        /* ====================================================================
+           11. HOW IT WORKS (THE PATH)
+        ==================================================================== */
+        .step-number {
+            font-family: var(--serif-display);
+            font-size: 3.5rem;
+            color: rgba(201, 168, 76, 0.1);
+            line-height: 1;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            z-index: 0;
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+        [data-theme="light"] .step-number {
+            color: rgba(217, 123, 6, 0.1);
+        }
+        .step-content {
+            position: relative;
+            z-index: 1;
+        }
+        .step-title {
+            font-family: var(--serif-body);
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            margin-bottom: 0.5rem;
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+        .step-desc {
+            font-size: 0.9rem;
+            color: rgba(200, 192, 168, 0.6);
+            line-height: 1.6;
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+        .path-connector {
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold-dim), transparent);
+            z-index: 0;
+        }
+        @media (max-width: 991px) {
+            .path-connector { display: none; }
+        }
+
+        /* ====================================================================
+           12. INTEGRATIONS (ARTIFACTS)
+        ==================================================================== */
+        .integration-card {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            text-align: center;
+        }
+        .integration-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            -webkit-transition: transform 0.3s, filter 0.3s;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .integration-name {
+            font-family: var(--serif-body);
+            font-size: 0.55rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(201, 168, 76, 0.5);
+            transition: color 0.3s;
+        }
+        .integration-card:hover .integration-name {
+            color: rgba(201, 168, 76, 0.9);
+        }
+        .integration-card:hover .integration-icon {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            -webkit-filter: drop-shadow(0 0 10px rgba(201, 168, 76, 0.5));
+            filter: drop-shadow(0 0 10px rgba(201, 168, 76, 0.5));
+        }
+
+        /* ====================================================================
+           13. TEAM SECTION
+        ==================================================================== */
+        #team { padding: 7rem 0; }
+        .testament-name { 
+            font-family: var(--serif-body); 
+            font-size: 0.8rem; 
+            letter-spacing: 0.1em; 
+            text-transform: uppercase; 
+            color: var(--gold-light); 
+            display: block; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+        .testament-role { 
+            font-size: 0.8rem; 
+            font-style: italic; 
+            color: rgba(200, 192, 168, 0.45); 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+
+        /* ====================================================================
+           14. ABOUT & CODEX
+        ==================================================================== */
+        #about { padding: 7rem 0; }
+        .codex-frame { 
+            padding: 3rem; 
+            overflow: hidden; 
+        }
+        .codex-frame::before { 
+            content: '❈'; 
+            position: absolute; 
+            top: 1rem; 
+            left: 1rem; 
+            color: var(--gold); 
+            font-size: 0.8rem; 
+            opacity: 0.5; 
+        }
+        .codex-frame::after { 
+            content: '❈'; 
+            position: absolute; 
+            bottom: 1rem; 
+            right: 1rem; 
+            color: var(--gold); 
+            font-size: 0.8rem; 
+            opacity: 0.5; 
+        }
+        .codex-stat { 
+            text-align: center; 
+            padding: 1.5rem 1rem; 
+            border-right: 1px solid rgba(201, 168, 76, 0.1); 
+        }
+        .codex-stat:last-child { 
+            border-right: none; 
+        }
+        .codex-stat-num { 
+            font-family: var(--serif-display); 
+            font-size: 2.4rem; 
+            background: linear-gradient(135deg, var(--gold-dim), var(--gold-light)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            display: block; 
+            line-height: 1; 
+            margin-bottom: 0.3rem; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+        .codex-stat-label { 
+            font-family: var(--serif-body); 
+            font-size: 0.6rem; 
+            letter-spacing: 0.2em; 
+            text-transform: uppercase; 
+            color: rgba(230, 212, 160, 0.45); 
+        }
+        .scroll-item { 
+            display: flex; 
+            gap: 1rem; 
+            align-items: flex-start; 
+            padding: 0.8rem 0; 
+            border-bottom: 1px solid rgba(201, 168, 76, 0.07); 
+        }
+        .scroll-item:last-child { 
+            border-bottom: none; 
+        }
+        .scroll-rune { 
+            color: var(--gold); 
+            font-size: 0.7rem; 
+            margin-top: 0.3rem; 
+            flex-shrink: 0; 
+            opacity: 0.8; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+        .scroll-text { 
+            font-size: 0.95rem; 
+            color: rgba(200, 192, 168, 0.75); 
+            line-height: 1.6; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+
+        /* ====================================================================
+           15. PRICING & TIERS
+        ==================================================================== */
+        .tier-card { 
+            padding: 2.5rem 2rem; 
+            height: 100%; 
+            position: relative; 
+        }
+        .tier-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 30px; 
+            height: 30px; 
+            border-top: 1px solid rgba(201, 168, 76, 0.3); 
+            border-left: 1px solid rgba(201, 168, 76, 0.3); 
+        }
+        .tier-card::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            right: 0; 
+            width: 30px; 
+            height: 30px; 
+            border-bottom: 1px solid rgba(201, 168, 76, 0.3); 
+            border-right: 1px solid rgba(201, 168, 76, 0.3); 
+        }
+        .tier-card:hover { 
+            -webkit-transform: translateY(-8px);
+            transform: translateY(-8px); 
+            border-color: rgba(201, 168, 76, 0.35); 
+            -webkit-box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(201, 168, 76, 0.06);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(201, 168, 76, 0.06); 
+        }
+        .tier-crown { 
+            font-family: var(--serif-body); 
+            font-size: 0.58rem; 
+            letter-spacing: 0.2em; 
+            text-transform: uppercase; 
+            color: var(--void); 
+            background: linear-gradient(90deg, var(--gold-dim), var(--gold-light)); 
+            padding: 0.25rem 0.9rem; 
+            -webkit-clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+            clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%); 
+            display: inline-block; 
+            margin-bottom: 1.5rem; 
+        }
+        .tier-name { 
+            font-family: var(--serif-display); 
+            font-size: 1.2rem; 
+            color: var(--gold-light); 
+            letter-spacing: 0.05em; 
+            margin-bottom: 0.4rem; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+        .tier-price { 
+            font-family: var(--serif-display); 
+            font-size: 2.8rem; 
+            color: #fff; 
+            line-height: 1; 
+            margin-bottom: 0.3rem; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+        .tier-price sup { 
+            font-size: 1.1rem; 
+            vertical-align: super; 
+            color: var(--gold); 
+        }
+        .tier-per { 
+            font-size: 0.78rem; 
+            color: rgba(200, 192, 168, 0.4); 
+            letter-spacing: 0.1em; 
+            font-family: var(--serif-body); 
+        }
+        .tier-feature { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+            padding: 0.45rem 0; 
+            font-size: 0.88rem; 
+            color: rgba(200, 192, 168, 0.75); 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+
+        /* ====================================================================
+           16. DETAILED COMPARISON TABLE (THE GRAND LEDGER)
+        ==================================================================== */
+        .table-mythic {
+            width: 100%;
+            border-collapse: collapse;
+            background: transparent;
+        }
+        .table-mythic th,
+        .table-mythic td {
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+            color: rgba(18, 18, 17, 0.8);
+            font-size: 0.9rem;
+            -webkit-transition: border-color 0.5s, color 0.5s;
+            transition: border-color 0.5s, color 0.5s;
+        }
+        .table-mythic td:first-child,
+        .table-mythic th:first-child {
+            text-align: left;
+            font-family: var(--serif-body);
+            letter-spacing: 0.05em;
+        }
+        .table-mythic thead th {
+            font-family: var(--serif-display);
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            border-bottom: 2px solid rgba(201, 168, 76, 0.3);
+            position: sticky;
+            top: 70px;
+            background: rgba(4, 3, 10, 0.95);
+            z-index: 10;
+        }
+        .icon-yes { color: var(--gold); font-size: 1.2rem; }
+        .icon-no { color: rgba(200, 192, 168, 0.2); font-size: 1.2rem; }
+
+        /* ====================================================================
+           17. FAQ ACCORDION (SCROLLS OF WISDOM)
+        ==================================================================== */
+        .accordion-item {
+            background-color: var(--stone);
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            margin-bottom: 1rem;
+            border-radius: 4px !important;
+            overflow: hidden;
+            -webkit-transition: background-color 0.5s, border-color 0.5s;
+            transition: background-color 0.5s, border-color 0.5s;
+        }
+        .accordion-button {
+            background-color: transparent;
+            color: var(--gold-light);
+            font-family: var(--serif-body);
+            letter-spacing: 0.05em;
+            padding: 1.5rem;
+            box-shadow: none !important;
+            cursor: none;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: rgba(201, 168, 76, 0.05);
+            color: var(--gold);
+        }
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23c9a84c'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+        .accordion-body {
+            color: rgba(200, 192, 168, 0.7);
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            line-height: 1.8;
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s;
+        }
+
+        /* ====================================================================
+           18. CTA & FOOTER
+        ==================================================================== */
+        #cta { 
+            padding: 8rem 0; 
+            position: relative; 
+            overflow: hidden; 
+            text-align: center; 
+        }
+        
+        #cta::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            height: 1px; 
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent); 
+        }
+        
+        .cta-seal { 
+            width: 80px; 
+            height: 80px; 
+            margin: 0 auto 2rem; 
+            border: 1px solid rgba(201, 168, 76, 0.3); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            -webkit-animation: sigilPulse 4s ease-in-out infinite;
+            animation: sigilPulse 4s ease-in-out infinite; 
+        }
+        
+        .cta-seal::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 6px; 
+            border-radius: 50%; 
+            border: 1px solid rgba(201, 168, 76, 0.15); 
+        }
+        
+        .cta-title { 
+            font-family: var(--serif-display); 
+            font-size: clamp(1.8rem, 4vw, 3.2rem); 
+            color: #fff; 
+            letter-spacing: 0.04em; 
+            line-height: 1.15; 
+            margin-bottom: 1.2rem; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+
+        #footer { 
+            padding: 5rem 0 2rem; 
+            border-top: 1px solid rgba(201, 168, 76, 0.08); 
+            background: var(--void); 
+            -webkit-transition: background 0.5s;
+            transition: background 0.5s; 
+        }
+        
+        .footer-brand { 
+            font-family: var(--serif-display); 
+            font-size: 1.6rem; 
+            background: linear-gradient(135deg, var(--gold-dim), var(--gold-light), var(--gold)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            display: block; 
+            margin-bottom: 1rem; 
+            font-weight: 700; 
+        }
+        
+        .footer-title { 
+            font-family: var(--serif-body); 
+            font-size: 1rem; 
+            font-weight: 700; 
+            color: #fff; 
+            margin-bottom: 1.5rem; 
+            letter-spacing: 0.05em; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+        
+        .footer-link { 
+            display: block; 
+            font-size: 0.9rem; 
+            color: rgba(200, 192, 168, 0.6); 
+            text-decoration: none; 
+            margin-bottom: 0.8rem; 
+            -webkit-transition: color 0.3s;
+            transition: color 0.3s; 
+            cursor: none; 
+        }
+        
+        .footer-link:hover { 
+            color: var(--gold-light); 
+        }
+
+        .social-myth { 
+            width: 36px; 
+            height: 36px; 
+            background: rgba(201, 168, 76, 0.05); 
+            border: 1px solid rgba(201, 168, 76, 0.2); 
+            border-radius: 8px; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: rgba(200, 192, 168, 0.5); 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s; 
+            cursor: none; 
+        }
+        
+        .social-myth:hover { 
+            background: rgba(201, 168, 76, 0.15); 
+            border-color: rgba(201, 168, 76, 0.5); 
+            color: var(--gold-light); 
+        }
+
+        /* ====================================================================
+           19. AUTH MODAL
+        ==================================================================== */
+        .auth-modal { 
+            background: linear-gradient(145deg, var(--stone), var(--rune)); 
+            border: 1px solid rgba(201, 168, 76, 0.3); 
+            border-radius: 4px; 
+            position: relative; 
+            overflow: hidden; 
+            -webkit-box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(201, 168, 76, 0.1);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(201, 168, 76, 0.1); 
+        }
+        
+        .auth-modal::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 3px; 
+            background: linear-gradient(90deg, transparent, var(--gold), transparent); 
+        }
+        
+        .modal-title { 
+            font-family: var(--serif-display); 
+            font-size: 1.5rem; 
+            color: var(--gold-light); 
+            letter-spacing: 0.05em; 
+            width: 100%; 
+            text-align: center; 
+        }
+        
+        .btn-close-white { 
+            -webkit-filter: invert(1) grayscale(100%) brightness(200%);
+            filter: invert(1) grayscale(100%) brightness(200%); 
+            cursor: none; 
+        }
+
+        .auth-tabs { 
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2); 
+            padding-bottom: 0; 
+            margin-bottom: 1.5rem !important; 
+        }
+        
+        .auth-tabs .nav-link { 
+            font-family: var(--serif-body); 
+            font-size: 0.8rem; 
+            letter-spacing: 0.15em; 
+            text-transform: uppercase; 
+            color: rgba(200, 192, 168, 0.5); 
+            background: transparent; 
+            border: none; 
+            border-bottom: 2px solid transparent; 
+            border-radius: 0; 
+            padding: 0.8rem 1.5rem; 
+            cursor: none; 
+            -webkit-transition: color 0.3s, border-color 0.3s;
+            transition: color 0.3s, border-color 0.3s; 
+        }
+        
+        .auth-tabs .nav-link:hover { 
+            color: var(--gold-light); 
+        }
+        
+        .auth-tabs .nav-link.active { 
+            color: var(--gold); 
+            border-bottom-color: var(--gold); 
+            font-weight: 600; 
+        }
+
+        .myth-input { 
+            background: rgba(4, 3, 10, 0.4); 
+            border: 1px solid rgba(201, 168, 76, 0.15); 
+            color: #c8c0a8; 
+            border-radius: 2px; 
+            padding: 0.85rem 1.2rem; 
+            font-family: var(--prose); 
+            font-size: 1rem; 
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s; 
+            cursor: none; 
+        }
+        
+        .myth-input::placeholder { 
+            color: rgba(200, 192, 168, 0.3); 
+            font-style: italic; 
+        }
+        
+        .myth-input:focus { 
+            background: rgba(4, 3, 10, 0.8); 
+            border-color: var(--gold); 
+            -webkit-box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1); 
+            color: var(--gold-light); 
+            outline: none; 
+        }
+
+        .btn-google {
+            background: rgba(176, 141, 60, 0.1) !important; 
+            border: 1px solid var(--gold-dim); 
+            color: var(--gold); 
+            font-family: var(--serif-body); 
+            font-size: 0.75rem; 
+            letter-spacing: 0.15em; 
+            text-transform: uppercase;
+            padding: 0.85rem; 
+            border-radius: 2px; 
+            cursor: none; 
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        
+        .btn-google:hover { 
+            background: rgba(176, 141, 60, 0.2) !important; 
+            border-color: var(--gold); 
+            color: var(--gold); 
+        }
+        
+        .auth-divider { 
+            display: flex; 
+            align-items: center; 
+            text-align: center; 
+            margin: 1.5rem 0; 
+            color: var(--gold-dim); 
+            font-size: 0.8rem; 
+            font-family: var(--serif-body); 
+            letter-spacing: 0.1em; 
+            text-transform: uppercase; 
+        }
+        
+        .auth-divider::before, 
+        .auth-divider::after { 
+            content: ''; 
+            flex: 1; 
+            border-bottom: 1px solid rgba(176, 141, 60, 0.2); 
+        }
+        
+        .auth-divider:not(:empty)::before { 
+            margin-right: 0.8em; 
+        }
+        
+        .auth-divider:not(:empty)::after { 
+            margin-left: 0.8em; 
+        }
+
+        /* ====================================================================
+           20. UTILITIES & ANIMATIONS
+        ==================================================================== */
+        .reveal { 
+            opacity: 0; 
+            -webkit-transform: translateY(30px);
+            transform: translateY(30px); 
+            -webkit-transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease; 
+        }
+        
+        .reveal.visible { 
+            opacity: 1; 
+            -webkit-transform: translateY(0);
+            transform: translateY(0); 
+        }
+        
+        .d1 { transition-delay: 0.1s; } 
+        .d2 { transition-delay: 0.2s; } 
+        .d3 { transition-delay: 0.3s; }
+        .d4 { transition-delay: 0.4s; }
+        
+        .section-title-myth { 
+            font-family: var(--serif-display); 
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem); 
+            color: #fff; 
+            letter-spacing: 0.04em; 
+            line-height: 1.15; 
+            -webkit-transition: color 0.5s;
+            transition: color 0.5s; 
+        }
+
+        /* Mobile navbar specific adjustments */
+        @media (max-width: 991px){
+            .navbar-toggler { 
+                border-color: rgba(201, 168, 76, 0.3) !important; 
+            }
+            .navbar-toggler-icon { 
+                -webkit-filter: invert(0.8) sepia(1) hue-rotate(10deg) saturate(3);
+                filter: invert(0.8) sepia(1) hue-rotate(10deg) saturate(3); 
+            }
+            .navbar-collapse { 
+                background: rgba(4, 3, 10, 0.97); 
+                padding: 1rem; 
+                border-top: 1px solid rgba(201, 168, 76, 0.1); 
+            }
+            [data-theme="light"] .navbar-collapse { 
+                background: rgba(249, 246, 240, 0.97); 
+            }
+            .mega-menu { 
+                width: 100%; 
+                -webkit-transform: none !important;
+                transform: none !important; 
+                left: 0 !important; 
+                border: none; 
+                padding: 1rem; 
+            }
+        }
+
+.codex-stat-label { 
+    font-size: 0.65rem; 
+    color: rgba(200, 192, 168, 0.9) !important; 
+    font-weight: 600; 
+}
+
+.data-shard span:not(.val) {
+    opacity: 1 !important; 
+    color: rgba(200, 192, 168, 0.9) !important;
+    font-weight: 600;
+}
+
+[data-theme="light"] .codex-stat-label,
+[data-theme="light"] .data-shard span:not(.val) {
+    color: #3a2a06 !important; 
+    font-weight: 700 !important; 
+}
+
+        /* ====================================================================
+           21. LIGHTBOX / IMAGE CLICK MODAL
+        ==================================================================== */
+        .ns-clickable {
+            cursor: zoom-in;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            display: block;
+        }
+        .ns-clickable:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(201, 168, 76, 0.25);
+            filter: brightness(1.08);
+        }
+        .ns-clickable:active { transform: scale(.98); }
+
+        #ns-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(4, 3, 10, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            animation: lbFadeIn .22s ease;
+        }
+        #ns-lightbox.open { display: flex; }
+        @keyframes lbFadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        #ns-lightbox-inner {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            animation: lbZoomIn .28s cubic-bezier(.34,1.56,.64,1);
+        }
+        @keyframes lbZoomIn {
+            from { transform: scale(.7); opacity: 0; }
+            to   { transform: scale(1);  opacity: 1; }
+        }
+        #ns-lightbox-svg {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 40px 100px rgba(0,0,0,.7), 0 0 60px rgba(201,168,76,.12);
+            background: var(--stone);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            overflow: hidden;
+            display: block;
+        }
+        #ns-lightbox-svg svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        #ns-lightbox-close {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+            border: 2px solid rgba(255,255,255,.15);
+            color: var(--void);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+            line-height: 1;
+        }
+        #ns-lightbox-close:hover {
+            background: linear-gradient(135deg, var(--ember), #ff7a47);
+            transform: rotate(90deg) scale(1.1);
+        }
+        #ns-lightbox-caption {
+            text-align: center;
+            color: rgba(200, 192, 168, 0.7);
+            font-family: var(--serif-body);
+            font-size: .72rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+        #ns-lightbox-nav {
+            display: flex;
+            justify-content: center;
+            gap: .5rem;
+            margin-top: .85rem;
+        }
+        .lb-nav-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(201, 168, 76, 0.25);
+            cursor: none;
+            transition: background 0.3s, transform 0.3s;
+            border: none;
+            padding: 0;
+        }
+        .lb-nav-dot.active { background: var(--gold); transform: scale(1.3); }
+        #ns-lightbox-prev,
+        #ns-lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            color: var(--gold);
+            font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center;
+            cursor: none;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        #ns-lightbox-prev { left: -56px; }
+        #ns-lightbox-next { right: -56px; }
+        #ns-lightbox-prev:hover, #ns-lightbox-next:hover {
+            background: rgba(201, 168, 76, 0.2);
+            border-color: var(--gold);
+        }
+        @media(max-width:768px){
+            #ns-lightbox-prev, #ns-lightbox-next { display: none; }
+            #ns-lightbox-close { top: -12px; right: -12px; width:34px;height:34px;font-size:.85rem; }
+        }
+
+
+        /* ====================================================================
+           22. IMAGE ENHANCEMENTS
+        ==================================================================== */
+        .myth-img {
+            width: 100%;
+            border-radius: 4px;
+            display: block;
+            object-fit: cover;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
+        }
+        .myth-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 40px rgba(201,168,76,.12);
+            filter: brightness(1.07);
+        }
+        .myth-img-frame {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        .myth-img-frame::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 28px; height: 28px;
+            border-top: 2px solid var(--gold);
+            border-left: 2px solid var(--gold);
+            z-index: 2;
+            opacity: 0.7;
+        }
+        .myth-img-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 28px; height: 28px;
+            border-bottom: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            z-index: 2;
+            opacity: 0.7;
+        }
+        .myth-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(4,3,10,0.7) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .myth-img-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
+        }
+        .myth-img-strip .myth-img-frame {
+            height: 120px;
+        }
+        .myth-img-strip .myth-img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+        .myth-img-strip .myth-img-label {
+            position: absolute;
+            bottom: 0.5rem;
+            left: 0.75rem;
+            z-index: 3;
+            font-family: var(--serif-body);
+            font-size: 0.52rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(200, 192, 168, 0.85);
+        }
+        /* About image */
+        .about-img-wrap {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .about-img-wrap img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(20%) sepia(15%);
+            transition: filter 0.5s;
+        }
+        .about-img-wrap:hover img { filter: grayscale(0%) sepia(0%); }
+        .about-img-wrap::before {
+            content: '';
+            position: absolute; top: 0; left: 0;
+            width: 32px; height: 32px;
+            border-top: 2px solid var(--gold);
+            border-left: 2px solid var(--gold);
+            z-index: 2; opacity: 0.8;
+        }
+        .about-img-wrap::after {
+            content: '';
+            position: absolute; bottom: 0; right: 0;
+            width: 32px; height: 32px;
+            border-bottom: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            z-index: 2; opacity: 0.8;
+        }
+        /* Testimonials strip */
+        .testi-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 4rem;
+        }
+        .testi-card {
+            background: linear-gradient(145deg, var(--stone), var(--rune));
+            border: 1px solid rgba(201, 168, 76, 0.12);
+            border-radius: 2px;
+            padding: 1.75rem 1.5rem;
+            position: relative;
+            transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+        }
+        .testi-card:hover {
+            border-color: rgba(201, 168, 76, 0.35);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        .testi-card::before {
+            content: '"';
+            position: absolute;
+            top: 0.5rem; left: 1rem;
+            font-family: var(--serif-display);
+            font-size: 3rem;
+            color: var(--gold);
+            opacity: 0.2;
+            line-height: 1;
+        }
+        .testi-stars {
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+        .testi-quote {
+            font-family: var(--prose);
+            font-style: italic;
+            font-size: 0.95rem;
+            color: rgba(200, 192, 168, 0.75);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+        .testi-avatar {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+        .testi-name {
+            font-family: var(--serif-body);
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+        }
+        .testi-role {
+            font-size: 0.8rem;
+            color: rgba(200, 192, 168, 0.45);
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            .testi-strip { grid-template-columns: 1fr; }
+            .myth-img-strip { grid-template-columns: 1fr 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
+    <canvas id="cosmos"></canvas>
+
+    <nav id="mainNav" class="navbar navbar-expand-lg above">
+        <div class="container position-relative">
+            <a class="brand-name" href="#">Æther</a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto gap-lg-1">
+                    
+                    <li class="nav-item dropdown mega-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Home</a>
+                        <div class="dropdown-menu mega-menu border-0 shadow-lg">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <a href="#hero" class="mega-item">
+                                        <div class="mega-icon"><i class="bi bi-house-door"></i></div>
+                                        <div>
+                                            <div class="mega-title">Welcome to Æther</div>
+                                            <p class="mega-desc">Return to the sanctuary and explore our latest incantations.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#about" class="mega-item">
+                                        <div class="mega-icon"><i class="bi bi-compass"></i></div>
+                                        <div>
+                                            <div class="mega-title">Our Vision</div>
+                                            <p class="mega-desc">Understand the philosophy driving our arcane technology.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-12 border-top border-warning border-opacity-10 pt-3 mt-4">
+                                    <div class="d-flex align-items-center justify-content-between px-3">
+                                        <span class="text-muted small" style="font-family: var(--serif-body);">System Status: <span class="text-success">Optimal</span></span>
+                                        <a href="#" class="btn btn-sm btn-outline-warning" style="cursor:none; font-family: var(--serif-body); font-size: .7rem;">View Dashboard</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown mega-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Feature</a>
+                        <div class="dropdown-menu mega-menu border-0 shadow-lg">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <a href="#features" class="mega-item">
+                                        <div class="mega-icon"><i class="bi bi-eye-fill"></i></div>
+                                        <div>
+                                            <div class="mega-title">The All-Seeing</div>
+                                            <p class="mega-desc">Real-time omniscient dashboards revealing invisible patterns.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#integrations" class="mega-item">
+                                        <div class="mega-icon"><i class="bi bi-diagram-3-fill"></i></div>
+                                        <div>
+                                            <div class="mega-title">The Convergence</div>
+                                            <p class="mega-desc">Unite 200+ scattered tools under a single covenant.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#how-it-works" class="mega-item">
+                                        <div class="mega-icon"><i class="bi bi-magic"></i></div>
+                                        <div>
+                                            <div class="mega-title">The Path</div>
+                                            <p class="mega-desc">Discover how raw data is transmuted into intelligence.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 border-start border-warning border-opacity-10 ps-md-4 d-flex align-items-center">
+                                    <div class="text-center w-100 p-3 rounded" style="background: rgba(201,168,76,.05);">
+                                        <i class="bi bi-book text-warning fs-3 mb-2 d-block"></i>
+                                        <h6 class="text-white mb-1" style="font-family: var(--serif-body); transition: color 0.5s;">Explore the Codex</h6>
+                                        <p class="small text-muted mb-3">Read the full technical documentation.</p>
+                                        <button class="btn btn-sm btn-outline-warning" style="cursor:none;">View Scrolls</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown mega-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pricing</a>
+                        <div class="dropdown-menu mega-menu border-0 shadow-lg">
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <a href="#pricing" class="mega-item flex-column text-center align-items-center h-100">
+                                        <div class="mega-icon mb-2"><i class="bi bi-person"></i></div>
+                                        <div class="mega-title">Seeker</div>
+                                        <p class="mega-desc">For those who journey alone. $0/mo.</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#pricing" class="mega-item flex-column text-center align-items-center h-100" style="background: rgba(201,168,76,.05); border: 1px solid rgba(201,168,76,.2);">
+                                        <div class="mega-icon mb-2"><i class="bi bi-gem"></i></div>
+                                        <div class="mega-title text-warning">Ascended</div>
+                                        <p class="mega-desc">For covens ready to bend fate. $49/mo.</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#comparison" class="mega-item flex-column text-center align-items-center h-100">
+                                        <div class="mega-icon mb-2"><i class="bi bi-table"></i></div>
+                                        <div class="mega-title">Full Ledger</div>
+                                        <p class="mega-desc">Compare all artifacts and powers side-by-side.</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown mega-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Contact</a>
+                        <div class="dropdown-menu mega-menu border-0 shadow-lg" style="max-width: 600px;">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <a href="#footer" class="mega-item">
+                                        <div class="mega-icon"><i class="bi bi-envelope-paper"></i></div>
+                                        <div>
+                                            <div class="mega-title">Summon Support</div>
+                                            <p class="mega-desc">Our heralds respond within minutes.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#team" class="mega-item">
+                                        <div class="mega-icon"><i class="bi bi-people"></i></div>
+                                        <div>
+                                            <div class="mega-title">Meet the Council</div>
+                                            <p class="mega-desc">Connect with the Architects of Æther.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#faq" class="mega-item">
+                                        <div class="mega-icon"><i class="bi bi-question-circle"></i></div>
+                                        <div>
+                                            <div class="mega-title">Scrolls of Wisdom (FAQ)</div>
+                                            <p class="mega-desc">Find answers to the most common enchantments.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="mega-item">
+                                        <div class="mega-icon"><i class="bi bi-discord"></i></div>
+                                        <div>
+                                            <div class="mega-title">Community Discord</div>
+                                            <p class="mega-desc">Join 14K+ initiates sharing rituals.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+                
+                <div class="d-flex align-items-center mt-3 mt-lg-0">
+                    <button type="button" class="btn-arcane ms-lg-3" data-bs-toggle="modal" data-bs-target="#authModal">
+                        Get Started
+                    </button>
+                    
+                    <button id="themeToggle" class="btn btn-link nav-link shadow-none border-0 ms-3 p-0" style="font-size: 1.1rem; cursor: none;">
+                        <i id="themeIcon" class="bi bi-sun-fill" style="color: var(--gold);"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="above">
+        <svg class="arcane-circle" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="250" cy="250" r="240" stroke="#c9a84c" stroke-width="1"/>
+            <circle cx="250" cy="250" r="200" stroke="#c9a84c" stroke-width=".5" stroke-dasharray="8 12"/>
+            <circle cx="250" cy="250" r="160" stroke="#c9a84c" stroke-width=".5"/>
+            <polygon points="250,30 460,370 40,370" stroke="#c9a84c" stroke-width=".7" fill="none"/>
+            <polygon points="250,470 40,130 460,130" stroke="#c9a84c" stroke-width=".7" fill="none"/>
+        </svg>
+        <svg class="arcane-circle-inner" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="200" r="190" stroke="#9b4dca" stroke-width="1" stroke-dasharray="4 8"/>
+            <circle cx="200" cy="200" r="140" stroke="#9b4dca" stroke-width=".5"/>
+            <line x1="200" y1="10" x2="200" y2="390" stroke="#9b4dca" stroke-width=".3"/>
+            <line x1="10" y1="200" x2="390" y2="200" stroke="#9b4dca" stroke-width=".3"/>
+        </svg>
+
+        <div class="container above">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <div class="hero-sigil">
+                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="38" stroke="#c9a84c" stroke-width="1.5"/>
+                            <circle cx="40" cy="40" r="28" stroke="#c9a84c" stroke-width=".7" stroke-dasharray="3 5"/>
+                            <polygon points="40,10 68,58 12,58" stroke="#c9a84c" stroke-width="1.2" fill="rgba(201,168,76,.1)"/>
+                        </svg>
+                    </div>
+                    <div class="eyebrow mb-3">✦ The Age of Arcane Intelligence ✦</div>
+                    <h1 class="hero-title">Command the<br><span class="gold-text">Hidden Forces</span><br>of the Modern World</h1>
+                    <p class="hero-subtitle">Where ancient wisdom meets algorithmic sorcery. Æther transmutes your raw data into sovereign intelligence — an oracle built for those who shape destiny.</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                        <button type="button" class="btn-primary-myth" data-bs-toggle="modal" data-bs-target="#authModal">
+                            Get Started
+                        </button>
+                        <a href="#how-it-works" class="btn-ghost-myth">Witness the Rites</a>
+                    </div>
+
+                    <!-- Arcane Image Strip -->
+                    <div class="myth-img-strip reveal">
+                        <div class="myth-img-frame ns-clickable" data-caption="✦ The Oracle Chamber — Data becomes destiny" tabindex="0" role="button">
+                            <div class="myth-img-overlay"></div>
+                            <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAwIDI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0ib2cxIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI2MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMmExZjAwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA0MDMwYSIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyNDAiIGZpbGw9InVybCgjb2cxKSIvPgogIDwhLS0gR3JpZCBsaW5lcyAtLT4KICA8ZyBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjA4KSIgc3Ryb2tlLXdpZHRoPSIwLjUiPgogICAgPGxpbmUgeDE9IjAiIHkxPSIzMCIgeDI9IjQwMCIgeTI9IjMwIi8+PGxpbmUgeDE9IjAiIHkxPSI2MCIgeDI9IjQwMCIgeTI9IjYwIi8+CiAgICA8bGluZSB4MT0iMCIgeTE9IjkwIiB4Mj0iNDAwIiB5Mj0iOTAiLz48bGluZSB4MT0iMCIgeTE9IjEyMCIgeDI9IjQwMCIgeTI9IjEyMCIvPgogICAgPGxpbmUgeDE9IjAiIHkxPSIxNTAiIHgyPSI0MDAiIHkyPSIxNTAiLz48bGluZSB4MT0iMCIgeTE9IjE4MCIgeDI9IjQwMCIgeTI9IjE4MCIvPgogICAgPGxpbmUgeDE9IjAiIHkxPSIyMTAiIHgyPSI0MDAiIHkyPSIyMTAiLz4KICAgIDxsaW5lIHgxPSI0MCIgeTE9IjAiIHgyPSI0MCIgeTI9IjI0MCIvPjxsaW5lIHgxPSI4MCIgeTE9IjAiIHgyPSI4MCIgeTI9IjI0MCIvPgogICAgPGxpbmUgeDE9IjEyMCIgeTE9IjAiIHgyPSIxMjAiIHkyPSIyNDAiLz48bGluZSB4MT0iMTYwIiB5MT0iMCIgeDI9IjE2MCIgeTI9IjI0MCIvPgogICAgPGxpbmUgeDE9IjIwMCIgeTE9IjAiIHgyPSIyMDAiIHkyPSIyNDAiLz48bGluZSB4MT0iMjQwIiB5MT0iMCIgeDI9IjI0MCIgeTI9IjI0MCIvPgogICAgPGxpbmUgeDE9IjI4MCIgeTE9IjAiIHgyPSIyODAiIHkyPSIyNDAiLz48bGluZSB4MT0iMzIwIiB5MT0iMCIgeDI9IjMyMCIgeTI9IjI0MCIvPgogICAgPGxpbmUgeDE9IjM2MCIgeTE9IjAiIHgyPSIzNjAiIHkyPSIyNDAiLz4KICA8L2c+CiAgPCEtLSBDaXJjdWl0IHBhdGhzIC0tPgogIDxnIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMzUpIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSI+CiAgICA8cG9seWxpbmUgcG9pbnRzPSI0MCwxMjAgODAsMTIwIDgwLDYwIDE2MCw2MCAxNjAsOTAgMjQwLDkwIDI0MCw2MCAzMjAsNjAgMzIwLDEyMCAzNjAsMTIwIi8+CiAgICA8cG9seWxpbmUgcG9pbnRzPSI0MCwxNTAgODAsMTUwIDgwLDE4MCAyMDAsMTgwIDIwMCwxNTAgMjgwLDE1MCAyODAsMTgwIDM2MCwxODAiLz4KICAgIDxwb2x5bGluZSBwb2ludHM9IjIwMCw2MCAyMDAsMzAgMjgwLDMwIDI4MCw2MCIvPgogIDwvZz4KICA8IS0tIE5vZGVzIC0tPgogIDxnIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjYpIj4KICAgIDxjaXJjbGUgY3g9IjgwIiBjeT0iMTIwIiByPSI0Ii8+PGNpcmNsZSBjeD0iMTYwIiBjeT0iNjAiIHI9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjI0MCIgY3k9IjkwIiByPSI0Ii8+PGNpcmNsZSBjeD0iMzIwIiBjeT0iNjAiIHI9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjE4MCIgcj0iNCIvPjxjaXJjbGUgY3g9IjI4MCIgY3k9IjE1MCIgcj0iNCIvPgogIDwvZz4KICA8IS0tIEdsb3cgbm9kZXMgLS0+CiAgPGcgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiPgogICAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMzAiIHI9IjUiLz48Y2lyY2xlIGN4PSIyODAiIGN5PSIzMCIgcj0iMyIvPgogIDwvZz4KICA8IS0tIEdsb3cgaGFsb3MgLS0+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSIzMCIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDQpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjE1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSIxOCIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDYpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjI1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI2IiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC44KSIvPgogIDwhLS0gTGFiZWwgLS0+CiAgPHRleHQgeD0iMjAiIHk9IjIyOCIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuNSkiIGZvbnQtc2l6ZT0iOSIgZm9udC1mYW1pbHk9InNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMyI+VEhFIE9SQUNMRTwvdGV4dD4KPC9zdmc+" alt="Technology" class="myth-img">
+                            <span class="myth-img-label">The Oracle</span>
+                        </div>
+                        <div class="myth-img-frame ns-clickable" data-caption="✦ The Convergence — 200+ integrations unified" tabindex="0" role="button">
+                            <div class="myth-img-overlay"></div>
+                            <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAwIDI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0ibmcxIiBjeD0iMzAlIiBjeT0iNTAlIiByPSI3MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWEwZjJlIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA0MDMwYSIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyNDAiIGZpbGw9InVybCgjbmcxKSIvPgogIDwhLS0gU2VydmVyIHJhY2tzIC0tPgogIDxyZWN0IHg9IjMwIiB5PSI0MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjE2MCIgZmlsbD0icmdiYSgyOCwyMyw0OCwwLjkpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjIpIiBzdHJva2Utd2lkdGg9IjEiIHJ4PSIyIi8+CiAgPHJlY3QgeD0iMzEwIiB5PSI0MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjE2MCIgZmlsbD0icmdiYSgyOCwyMyw0OCwwLjkpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjIpIiBzdHJva2Utd2lkdGg9IjEiIHJ4PSIyIi8+CiAgPCEtLSBTZXJ2ZXIgdW5pdHMgbGVmdCAtLT4KICA8ZyBmaWxsPSJyZ2JhKDE4LDE1LDMwLDEpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjE1KSIgc3Ryb2tlLXdpZHRoPSIwLjUiPgogICAgPHJlY3QgeD0iMzYiIHk9IjQ4IiB3aWR0aD0iNDgiIGhlaWdodD0iMTIiIHJ4PSIxIi8+PHJlY3QgeD0iMzYiIHk9IjY2IiB3aWR0aD0iNDgiIGhlaWdodD0iMTIiIHJ4PSIxIi8+CiAgICA8cmVjdCB4PSIzNiIgeT0iODQiIHdpZHRoPSI0OCIgaGVpZ2h0PSIxMiIgcng9IjEiLz48cmVjdCB4PSIzNiIgeT0iMTAyIiB3aWR0aD0iNDgiIGhlaWdodD0iMTIiIHJ4PSIxIi8+CiAgICA8cmVjdCB4PSIzNiIgeT0iMTIwIiB3aWR0aD0iNDgiIGhlaWdodD0iMTIiIHJ4PSIxIi8+PHJlY3QgeD0iMzYiIHk9IjEzOCIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjEyIiByeD0iMSIvPgogICAgPHJlY3QgeD0iMzYiIHk9IjE1NiIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjEyIiByeD0iMSIvPjxyZWN0IHg9IjM2IiB5PSIxNzQiIHdpZHRoPSI0OCIgaGVpZ2h0PSIxMiIgcng9IjEiLz4KICA8L2c+CiAgPCEtLSBMRUQgaW5kaWNhdG9ycyBsZWZ0IC0tPgogIDxnPjxjaXJjbGUgY3g9Ijc0IiBjeT0iNTQiIHI9IjIuNSIgZmlsbD0iIzRhZGU4MCIgb3BhY2l0eT0iMC45Ii8+CiAgPGNpcmNsZSBjeD0iNzQiIGN5PSI3MiIgcj0iMi41IiBmaWxsPSIjNGFkZTgwIiBvcGFjaXR5PSIwLjkiLz4KICA8Y2lyY2xlIGN4PSI3NCIgY3k9IjkwIiByPSIyLjUiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjkpIi8+CiAgPGNpcmNsZSBjeD0iNzQiIGN5PSIxMDgiIHI9IjIuNSIgZmlsbD0iIzRhZGU4MCIgb3BhY2l0eT0iMC45Ii8+CiAgPGNpcmNsZSBjeD0iNzQiIGN5PSIxMjYiIHI9IjIuNSIgZmlsbD0iI2Y4NzE3MSIgb3BhY2l0eT0iMC44Ii8+CiAgPGNpcmNsZSBjeD0iNzQiIGN5PSIxNDQiIHI9IjIuNSIgZmlsbD0iIzRhZGU4MCIgb3BhY2l0eT0iMC45Ii8+CiAgPGNpcmNsZSBjeD0iNzQiIGN5PSIxNjIiIHI9IjIuNSIgZmlsbD0iIzRhZGU4MCIgb3BhY2l0eT0iMC45Ii8+CiAgPGNpcmNsZSBjeD0iNzQiIGN5PSIxODAiIHI9IjIuNSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiLz48L2c+CiAgPCEtLSBTZXJ2ZXIgdW5pdHMgcmlnaHQgLS0+CiAgPGcgZmlsbD0icmdiYSgxOCwxNSwzMCwxKSIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjgsNzYsMC4xNSkiIHN0cm9rZS13aWR0aD0iMC41Ij4KICAgIDxyZWN0IHg9IjMxNiIgeT0iNDgiIHdpZHRoPSI0OCIgaGVpZ2h0PSIxMiIgcng9IjEiLz48cmVjdCB4PSIzMTYiIHk9IjY2IiB3aWR0aD0iNDgiIGhlaWdodD0iMTIiIHJ4PSIxIi8+CiAgICA8cmVjdCB4PSIzMTYiIHk9Ijg0IiB3aWR0aD0iNDgiIGhlaWdodD0iMTIiIHJ4PSIxIi8+PHJlY3QgeD0iMzE2IiB5PSIxMDIiIHdpZHRoPSI0OCIgaGVpZ2h0PSIxMiIgcng9IjEiLz4KICAgIDxyZWN0IHg9IjMxNiIgeT0iMTIwIiB3aWR0aD0iNDgiIGhlaWdodD0iMTIiIHJ4PSIxIi8+PHJlY3QgeD0iMzE2IiB5PSIxMzgiIHdpZHRoPSI0OCIgaGVpZ2h0PSIxMiIgcng9IjEiLz4KICAgIDxyZWN0IHg9IjMxNiIgeT0iMTU2IiB3aWR0aD0iNDgiIGhlaWdodD0iMTIiIHJ4PSIxIi8+PHJlY3QgeD0iMzE2IiB5PSIxNzQiIHdpZHRoPSI0OCIgaGVpZ2h0PSIxMiIgcng9IjEiLz4KICA8L2c+CiAgPCEtLSBMRUQgaW5kaWNhdG9ycyByaWdodCAtLT4KICA8Zz48Y2lyY2xlIGN4PSIzNTQiIGN5PSI1NCIgcj0iMi41IiBmaWxsPSIjNGFkZTgwIiBvcGFjaXR5PSIwLjkiLz4KICA8Y2lyY2xlIGN4PSIzNTQiIGN5PSI3MiIgcj0iMi41IiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC45KSIvPgogIDxjaXJjbGUgY3g9IjM1NCIgY3k9IjkwIiByPSIyLjUiIGZpbGw9IiM0YWRlODAiIG9wYWNpdHk9IjAuOSIvPgogIDxjaXJjbGUgY3g9IjM1NCIgY3k9IjEwOCIgcj0iMi41IiBmaWxsPSIjNGFkZTgwIiBvcGFjaXR5PSIwLjkiLz4KICA8Y2lyY2xlIGN4PSIzNTQiIGN5PSIxMjYiIHI9IjIuNSIgZmlsbD0iIzRhZGU4MCIgb3BhY2l0eT0iMC45Ii8+CiAgPGNpcmNsZSBjeD0iMzU0IiBjeT0iMTQ0IiByPSIyLjUiIGZpbGw9IiNmODcxNzEiIG9wYWNpdHk9IjAuOCIvPgogIDxjaXJjbGUgY3g9IjM1NCIgY3k9IjE2MiIgcj0iMi41IiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC45KSIvPgogIDxjaXJjbGUgY3g9IjM1NCIgY3k9IjE4MCIgcj0iMi41IiBmaWxsPSIjNGFkZTgwIiBvcGFjaXR5PSIwLjkiLz48L2c+CiAgPCEtLSBDb25uZWN0aW9uIGxpbmVzIC0tPgogIDxnIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMjUpIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPHBhdGggZD0iTTkwLDU0IEMxNTAsNTQgMjUwLDU0IDMxMCw1NCIvPgogICAgPHBhdGggZD0iTTkwLDkwIEMxNDAsOTAgMjAwLDEyMCAzMTAsOTAiLz4KICAgIDxwYXRoIGQ9Ik05MCwxMjYgQzE2MCwxMjYgMjQwLDEwOCAzMTAsMTI2Ii8+CiAgICA8cGF0aCBkPSJNOTAsMTYyIEMxNTAsMTYyIDI1MCwxNjIgMzEwLDE2MiIvPgogIDwvZz4KICA8IS0tIERhdGEgcHVsc2VzIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjU0IiByPSIzIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC44KSIvPgogIDxjaXJjbGUgY3g9IjE4MCIgY3k9IjkwIiByPSIzIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC42KSIvPgogIDxjaXJjbGUgY3g9IjIyMCIgY3k9IjE2MiIgcj0iMyIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuNykiLz4KICA8dGV4dCB4PSIyMCIgeT0iMjI4IiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC41KSIgZm9udC1zaXplPSI5IiBmb250LWZhbWlseT0ic2VyaWYiIGxldHRlci1zcGFjaW5nPSIzIj5USEUgTkVUV09SSzwvdGV4dD4KPC9zdmc+" alt="Network" class="myth-img">
+                            <span class="myth-img-label">The Network</span>
+                        </div>
+                        <div class="myth-img-frame ns-clickable" data-caption="✦ The Sanctum — Where intelligence is forged" tabindex="0" role="button">
+                            <div class="myth-img-overlay"></div>
+                            <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDAwIDI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0ic2cxIiBjeD0iNTAlIiBjeT0iNDAlIiByPSI2MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWYxMDI4Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA0MDMwYSIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyNDAiIGZpbGw9InVybCgjc2cxKSIvPgogIDwhLS0gT3V0ZXIgY2lyY2xlIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjExNSIgcj0iOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMTIpIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxMTUiIHI9IjcwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMTU1LDc3LDIwMiwwLjE1KSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtZGFzaGFycmF5PSI0IDYiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxMTUiIHI9IjUwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjIpIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8IS0tIFRyaWFuZ2xlIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iMjAwLDM1IDI3NSwxNTUgMTI1LDE1NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjgsNzYsMC4zKSIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KICA8IS0tIEludmVydGVkIHRyaWFuZ2xlIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iMjAwLDE5NSAxMjUsNzUgMjc1LDc1IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjE1KSIgc3Ryb2tlLXdpZHRoPSIwLjgiLz4KICA8IS0tIENlbnRlciBnbG93IC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjExNSIgcj0iMjAiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjA1KSIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjgsNzYsMC4zKSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTE1IiByPSI4IiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC40KSIvPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjExNSIgcj0iNCIgZmlsbD0icmdiYSgyNDAsMjA4LDEyOCwwLjkpIi8+CiAgPCEtLSBSdW5lIGRvdHMgLS0+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMzUiIHI9IjQiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjgpIi8+CiAgPGNpcmNsZSBjeD0iMjc1IiBjeT0iMTU1IiByPSI0IiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC44KSIvPgogIDxjaXJjbGUgY3g9IjEyNSIgY3k9IjE1NSIgcj0iNCIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOCkiLz4KICA8IS0tIEFyY2FuZSB0ZXh0IC0tPgogIDx0ZXh0IHg9IjIwIiB5PSIyMjgiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjUpIiBmb250LXNpemU9IjkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjMiPlRIRSBTQU5DVFVNPC90ZXh0Pgo8L3N2Zz4=" alt="Analytics" class="myth-img">
+                            <span class="myth-img-label">The Sanctum</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 d-none d-lg-flex justify-content-center">
+                    <div class="artifact-frame" style="width:420px;height:420px;">
+                        <div class="data-shard shard-1"><span class="val">99.97%</span><span style="font-size:.55rem;opacity:.7;">Uptime covenant</span></div>
+                        <div class="data-shard shard-2"><span class="val">14K+</span><span style="font-size:.55rem;opacity:.7;">Initiates enrolled</span></div>
+                        <div class="data-shard shard-3"><span class="val">4.9 ★</span><span style="font-size:.55rem;opacity:.7;">Oracle rating</span></div>
+                        <div class="artifact-orb">
+                            <div class="orb-ring"></div>
+                            <div class="orb-ring"></div>
+                            <div class="orb-ring"></div>
+                            <span class="orb-rune">Æ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="above">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <div class="eyebrow mb-2">The Six Arcana</div>
+                <h2 class="section-title-myth">Powers Bestowed Upon the Worthy</h2>
+                <div class="ornament mt-3"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 reveal d1">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrap"><i class="bi bi-eye-fill"></i></div>
+                        <div class="feature-title">The All-Seeing</div>
+                        <p class="feature-text">Real-time omniscient dashboards that reveal patterns invisible to mortal minds. Connect your fragmented sources into a single pane of ultimate truth.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal d2">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrap"><i class="bi bi-shield-fill-check"></i></div>
+                        <div class="feature-title">The Ward</div>
+                        <p class="feature-text">Impenetrable fortress-grade encryption woven with SOC 2 sigils. Your operational secrets remain sealed from dark forces and unauthorized entities.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal d3">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrap"><i class="bi bi-stars"></i></div>
+                        <div class="feature-title">The Oracle</div>
+                        <p class="feature-text">AI divination that predicts market movements, team burnout, and hidden revenue opportunities months before they materialize into reality.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal d1">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrap"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <div class="feature-title">The Quickening</div>
+                        <p class="feature-text">Sub-millisecond query execution powered by our proprietary global edge network. Your requests are fulfilled before your finger lifts from the mouse.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal d2">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrap"><i class="bi bi-infinity"></i></div>
+                        <div class="feature-title">The Eternal Loop</div>
+                        <p class="feature-text">Construct self-healing automation workflows that execute flawlessly day and night. Focus on high-magic tasks while the system handles the mundane.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal d3">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrap"><i class="bi bi-people-fill"></i></div>
+                        <div class="feature-title">The Coven Protocol</div>
+                        <p class="feature-text">Seamless multi-user collaboration with granular access controls. Share specific runes and dashboards with stakeholders without exposing the core core.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="above">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <div class="eyebrow mb-2">The Journey</div>
+                <h2 class="section-title-myth">The Path of Mastery</h2>
+                <div class="ornament mt-3"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+                <p class="feature-text mx-auto mt-3" style="max-width: 600px;">From fragmented data to sovereign intelligence in four simple rites.</p>
+            </div>
+
+            <div class="row g-4 position-relative">
+                <div class="col-md-6 col-lg-3 reveal d1">
+                    <div class="feature-card step-content text-center pt-5">
+                        <div class="step-number">01</div>
+                        <div class="feature-icon-wrap mx-auto"><i class="bi bi-plug"></i></div>
+                        <div class="step-title">The Summoning</div>
+                        <p class="step-desc">Connect your existing tools via our secure API portals in mere seconds.</p>
+                        <div class="path-connector"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal d2">
+                    <div class="feature-card step-content text-center pt-5">
+                        <div class="step-number">02</div>
+                        <div class="feature-icon-wrap mx-auto"><i class="bi bi-funnel"></i></div>
+                        <div class="step-title">The Transmutation</div>
+                        <p class="step-desc">Our algorithms cleanse and harmonize the raw data into a unified structure.</p>
+                        <div class="path-connector"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal d3">
+                    <div class="feature-card step-content text-center pt-5">
+                        <div class="step-number">03</div>
+                        <div class="feature-icon-wrap mx-auto"><i class="bi bi-cpu"></i></div>
+                        <div class="step-title">The Divination</div>
+                        <p class="step-desc">The Oracle AI processes the structures to find invisible insights and trends.</p>
+                        <div class="path-connector"></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal d4">
+                    <div class="feature-card step-content text-center pt-5">
+                        <div class="step-number">04</div>
+                        <div class="feature-icon-wrap mx-auto"><i class="bi bi-display"></i></div>
+                        <div class="step-title">The Revelation</div>
+                        <p class="step-desc">View your new reality through highly customizable, real-time dashboards.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Atmosphere image for How It Works -->
+            <div class="row mt-5 reveal">
+                <div class="col-12">
+                    <div class="myth-img-frame ns-clickable" data-caption="✦ The Path of Mastery — From raw chaos to sovereign intelligence" tabindex="0" role="button" style="height: 200px;">
+                        <div class="myth-img-overlay"></div>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InBnMSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDQwMzBhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTUlIiBzdG9wLWNvbG9yPSIjMGQwYTFhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMTIwZjFlIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iODUlIiBzdG9wLWNvbG9yPSIjMGQwYTFhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA0MDMwYSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI3BnMSkiLz4KICA8IS0tIFN0ZXAgMSB6b25lIC0tPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4wMTUpIi8+CiAgPGNpcmNsZSBjeD0iNzUiIGN5PSIxMDAiIHI9IjM1IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjIpIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8Y2lyY2xlIGN4PSI3NSIgY3k9IjEwMCIgcj0iMjIiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjA1KSIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjgsNzYsMC4zNSkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHRleHQgeD0iNzUiIHk9IjEwNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtZmFtaWx5PSJzZXJpZiI+MDE8L3RleHQ+CiAgPHRleHQgeD0iMTQwIiB5PSI5NiIgZmlsbD0icmdiYSgyMDAsMTkyLDE2OCwwLjcpIiBmb250LXNpemU9IjExIiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyI+VGhlIFN1bW1vbmluZzwvdGV4dD4KICA8dGV4dCB4PSIxNDAiIHk9IjExMiIgZmlsbD0icmdiYSgyMDAsMTkyLDE2OCwwLjQpIiBmb250LXNpemU9IjkiIGZvbnQtZmFtaWx5PSJzZXJpZiI+Q29ubmVjdCB5b3VyIHRvb2xzPC90ZXh0PgogIDwhLS0gQXJyb3cgMSAtLT4KICA8cGF0aCBkPSJNMjkwLDEwMCBMMzEwLDEwMCIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjgsNzYsMC40KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG1hcmtlci1lbmQ9InVybCgjYXJyKSIvPgogIDxsaW5lIHgxPSIyOTAiIHkxPSIxMDAiIHgyPSIzMTAiIHkyPSIxMDAiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuNCkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPCEtLSBTdGVwIDIgem9uZSAtLT4KICA8cmVjdCB4PSIzMDAiIHk9IjAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJyZ2JhKDE1NSw3NywyMDIsMC4wMTUpIi8+CiAgPGNpcmNsZSBjeD0iMzc1IiBjeT0iMTAwIiByPSIzNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDE1NSw3NywyMDIsMC4yKSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iMzc1IiBjeT0iMTAwIiByPSIyMiIgZmlsbD0icmdiYSgxNTUsNzcsMjAyLDAuMDUpIiBzdHJva2U9InJnYmEoMTU1LDc3LDIwMiwwLjM1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSIzNzUiIHk9IjEwNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtZmFtaWx5PSJzZXJpZiI+MDI8L3RleHQ+CiAgPHRleHQgeD0iNDQwIiB5PSI5NiIgZmlsbD0icmdiYSgyMDAsMTkyLDE2OCwwLjcpIiBmb250LXNpemU9IjExIiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyI+VGhlIFRyYW5zbXV0YXRpb248L3RleHQ+CiAgPHRleHQgeD0iNDQwIiB5PSIxMTIiIGZpbGw9InJnYmEoMjAwLDE5MiwxNjgsMC40KSIgZm9udC1zaXplPSI5IiBmb250LWZhbWlseT0ic2VyaWYiPkNsZWFuc2UgJmFtcDsgaGFybW9uaXplPC90ZXh0PgogIDwhLS0gQXJyb3cgMiAtLT4KICA8bGluZSB4MT0iNTkwIiB5MT0iMTAwIiB4Mj0iNjEwIiB5Mj0iMTAwIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjQpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDwhLS0gU3RlcCAzIHpvbmUgLS0+CiAgPHJlY3QgeD0iNjAwIiB5PSIwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDE1KSIvPgogIDxjaXJjbGUgY3g9IjY3NSIgY3k9IjEwMCIgcj0iMzUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMikiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjY3NSIgY3k9IjEwMCIgcj0iMjIiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjA1KSIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjgsNzYsMC4zNSkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHRleHQgeD0iNjc1IiB5PSIxMDYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjkpIiBmb250LXNpemU9IjE2IiBmb250LWZhbWlseT0ic2VyaWYiPjAzPC90ZXh0PgogIDx0ZXh0IHg9Ijc0MCIgeT0iOTYiIGZpbGw9InJnYmEoMjAwLDE5MiwxNjgsMC43KSIgZm9udC1zaXplPSIxMSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXN0eWxlPSJpdGFsaWMiPlRoZSBEaXZpbmF0aW9uPC90ZXh0PgogIDx0ZXh0IHg9Ijc0MCIgeT0iMTEyIiBmaWxsPSJyZ2JhKDIwMCwxOTIsMTY4LDAuNCkiIGZvbnQtc2l6ZT0iOSIgZm9udC1mYW1pbHk9InNlcmlmIj5BSSBmaW5kcyBpbnNpZ2h0czwvdGV4dD4KICA8IS0tIEFycm93IDMgLS0+CiAgPGxpbmUgeDE9Ijg5MCIgeTE9IjEwMCIgeDI9IjkxMCIgeTI9IjEwMCIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjgsNzYsMC40KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8IS0tIFN0ZXAgNCB6b25lIC0tPgogIDxyZWN0IHg9IjkwMCIgeT0iMCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InJnYmEoMTI2LDIwNywyMzQsMC4wMTUpIi8+CiAgPGNpcmNsZSBjeD0iOTc1IiBjeT0iMTAwIiByPSIzNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDEyNiwyMDcsMjM0LDAuMikiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9Ijk3NSIgY3k9IjEwMCIgcj0iMjIiIGZpbGw9InJnYmEoMTI2LDIwNywyMzQsMC4wNCkiIHN0cm9rZT0icmdiYSgxMjYsMjA3LDIzNCwwLjMpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDx0ZXh0IHg9Ijk3NSIgeT0iMTA2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC45KSIgZm9udC1zaXplPSIxNiIgZm9udC1mYW1pbHk9InNlcmlmIj4wNDwvdGV4dD4KICA8dGV4dCB4PSIxMDQwIiB5PSI5NiIgZmlsbD0icmdiYSgyMDAsMTkyLDE2OCwwLjcpIiBmb250LXNpemU9IjExIiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc3R5bGU9Iml0YWxpYyI+VGhlIFJldmVsYXRpb248L3RleHQ+CiAgPHRleHQgeD0iMTA0MCIgeT0iMTEyIiBmaWxsPSJyZ2JhKDIwMCwxOTIsMTY4LDAuNCkiIGZvbnQtc2l6ZT0iOSIgZm9udC1mYW1pbHk9InNlcmlmIj5MaXZlIGRhc2hib2FyZHM8L3RleHQ+CiAgPCEtLSBEaXZpZGVyIGxpbmVzIC0tPgogIDxsaW5lIHgxPSIzMDAiIHkxPSIyMCIgeDI9IjMwMCIgeTI9IjE4MCIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjgsNzYsMC4wNykiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWRhc2hhcnJheT0iMyA1Ii8+CiAgPGxpbmUgeDE9IjYwMCIgeTE9IjIwIiB4Mj0iNjAwIiB5Mj0iMTgwIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjA3KSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtZGFzaGFycmF5PSIzIDUiLz4KICA8bGluZSB4MT0iOTAwIiB5MT0iMjAiIHgyPSI5MDAiIHkyPSIxODAiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMDcpIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1kYXNoYXJyYXk9IjMgNSIvPgo8L3N2Zz4=" alt="The Path" class="myth-img" style="height:200px;object-fit:cover;object-position:center 40%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="integrations" class="above">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 reveal">
+                    <div class="eyebrow mb-2">The Convergence</div>
+                    <h2 class="section-title-myth mb-4">Connect with Ancient Artifacts</h2>
+                    <p class="feature-text mb-4">Æther does not demand you abandon your tools. Instead, it acts as the supreme conduit, pulling data from over 200+ distinct applications to form a single, unbroken chain of command.</p>
+                    <button class="btn-ghost-myth mt-2" data-bs-toggle="modal" data-bs-target="#authModal">Explore Directory</button>
+                </div>
+                <div class="col-lg-7 reveal d2">
+                    <div class="row g-3">
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-github integration-icon"></i>
+    <span class="integration-name">GitHub</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-slack integration-icon"></i>
+    <span class="integration-name">Slack</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-google integration-icon"></i>
+    <span class="integration-name">Google</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-stripe integration-icon"></i>
+    <span class="integration-name">Stripe</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-discord integration-icon"></i>
+    <span class="integration-name">Discord</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-wordpress integration-icon"></i>
+    <span class="integration-name">WordPress</span>
+</div></div>
+
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-microsoft integration-icon"></i>
+    <span class="integration-name">Microsoft</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-cloud-arrow-up-fill integration-icon"></i>
+    <span class="integration-name">AWS</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-database-fill integration-icon"></i>
+    <span class="integration-name">PostgreSQL</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-envelope-fill integration-icon"></i>
+    <span class="integration-name">Mailchimp</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-bar-chart-fill integration-icon"></i>
+    <span class="integration-name">Tableau</span>
+</div></div>
+                        <div class="col-4 col-sm-4"><div class="integration-card rounded" style="flex-direction:column;gap:0.5rem;">
+    <i class="bi bi-shield-lock-fill integration-icon"></i>
+    <span class="integration-name">Vault</span>
+</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="above">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <div class="eyebrow mb-2">The Inner Circle</div>
+                <h2 class="section-title-myth">Architects of Æther</h2>
+                <div class="ornament mt-3"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+                <p class="feature-text mx-auto mt-3" style="max-width: 600px;">Meet the council of visionaries who bound the arcane to the algorithmic.</p>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-3 reveal d1">
+                    <div class="feature-card text-center d-flex flex-column align-items-center">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzZiNGYyYSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSI0NSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMTUpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjMpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMiIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDgpIi8+CiAgPHRleHQgeD0iMTAwIiB5PSI5MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkVMPC90ZXh0PgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxNzUiIHJ4PSI1NSIgcnk9IjQwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4wOCkiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMikiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=" alt="CEO" class="rounded-circle mb-3 border border-warning border-opacity-25" style="width: 100px; height: 100px; object-fit: cover;">
+                        <div class="testament-name">Elias Thorne</div>
+                        <div class="testament-role mb-3">Grand Weaver (CEO)</div>
+                        <div class="d-flex gap-2 mt-auto">
+                            <a href="#" class="social-myth"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#" class="social-myth"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal d2">
+                    <div class="feature-card text-center d-flex flex-column align-items-center">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzNkMmI1ZSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSI0NSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMTUpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjMpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMiIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDgpIi8+CiAgPHRleHQgeD0iMTAwIiB5PSI5MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPlZWPC90ZXh0PgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxNzUiIHJ4PSI1NSIgcnk9IjQwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4wOCkiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMikiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=" alt="CTO" class="rounded-circle mb-3 border border-warning border-opacity-25" style="width: 100px; height: 100px; object-fit: cover;">
+                        <div class="testament-name">Valeria Vance</div>
+                        <div class="testament-role mb-3">Master Artificer (CTO)</div>
+                        <div class="d-flex gap-2 mt-auto">
+                            <a href="#" class="social-myth"><i class="bi bi-github"></i></a>
+                            <a href="#" class="social-myth"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal d3">
+                    <div class="feature-card text-center d-flex flex-column align-items-center">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzFhM2E0YSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSI0NSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMTUpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjMpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMiIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDgpIi8+CiAgPHRleHQgeD0iMTAwIiB5PSI5MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkRLPC90ZXh0PgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxNzUiIHJ4PSI1NSIgcnk9IjQwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4wOCkiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMikiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=" alt="CPO" class="rounded-circle mb-3 border border-warning border-opacity-25" style="width: 100px; height: 100px; object-fit: cover;">
+                        <div class="testament-name">Darius Kain</div>
+                        <div class="testament-role mb-3">Oracle of Design (CPO)</div>
+                        <div class="d-flex gap-2 mt-auto">
+                            <a href="#" class="social-myth"><i class="bi bi-dribbble"></i></a>
+                            <a href="#" class="social-myth"><i class="bi bi-twitter-x"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 reveal d4">
+                    <div class="feature-card text-center d-flex flex-column align-items-center">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzRhMmEzYSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSI0NSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMTUpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjMpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMiIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDgpIi8+CiAgPHRleHQgeD0iMTAwIiB5PSI5MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPlNMPC90ZXh0PgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxNzUiIHJ4PSI1NSIgcnk9IjQwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4wOCkiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMikiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=" alt="CMO" class="rounded-circle mb-3 border border-warning border-opacity-25" style="width: 100px; height: 100px; object-fit: cover;">
+                        <div class="testament-name">Serena Lux</div>
+                        <div class="testament-role mb-3">Voice of the Coven (CMO)</div>
+                        <div class="d-flex gap-2 mt-auto">
+                            <a href="#" class="social-myth"><i class="bi bi-envelope"></i></a>
+                            <a href="#" class="social-myth"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="above">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 reveal">
+                    <div class="codex-frame">
+                        <div class="eyebrow mb-2 text-center d-block">The Codex of Proof</div>
+                        <div class="ornament"><span class="ornament-symbol">— ✦ —</span></div>
+                        <div class="row g-0 mt-3">
+                            <div class="col-4 codex-stat"><span class="codex-stat-num">14K</span><span class="codex-stat-label">Initiates</span></div>
+                            <div class="col-4 codex-stat"><span class="codex-stat-num">60+</span><span class="codex-stat-label">Realms</span></div>
+                            <div class="col-4 codex-stat"><span class="codex-stat-num">∞</span><span class="codex-stat-label">Uptime</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 reveal d2">
+                    <div class="eyebrow mb-2">Our Genesis</div>
+                    <h2 class="section-title-myth mb-4">Forged in the Crucible of Necessity</h2>
+                    <p class="mb-4 feature-text" style="font-style:italic;">In the year of our founding, we witnessed the chaos of the fragmented digital age. Teams were lost in a labyrinth of disjointed tools. We summoned Æther to end that age.</p>
+                    <div class="scroll-item"><span class="scroll-rune">✦</span><p class="scroll-text mb-0"><strong>Custodians of your data</strong> — your scrolls are yours alone. We encrypt all data in transit and at rest using military-grade protocols.</p></div>
+                    <div class="scroll-item"><span class="scroll-rune">✦</span><p class="scroll-text mb-0"><strong>Vigil without end</strong> — our heralds respond within four minutes, ensuring your operations never falter during a crisis.</p></div>
+                    <div class="scroll-item"><span class="scroll-rune">✦</span><p class="scroll-text mb-0"><strong>Perpetual Evolution</strong> — new algorithms and integrations are forged every lunar cycle to keep you ahead of the market.</p></div>
+                </div>
+            </div>
+
+            <!-- About atmosphere image -->
+            <div class="row mt-5 reveal">
+                <div class="col-12">
+                    <div class="about-img-wrap ns-clickable" data-caption="✦ The Sanctum — Forged in the crucible of necessity" tabindex="0" role="button">
+                        <div class="myth-img-overlay" style="background: linear-gradient(180deg, rgba(4,3,10,0.3) 0%, transparent 40%, transparent 60%, rgba(4,3,10,0.5) 100%);"></div>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTIwMCA0MjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9ImFiZzEiIGN4PSI1MCUiIGN5PSI1MCUiIHI9IjYwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxYzE3MzAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiMwZDBhMWEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDQwMzBhIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJhYmcyIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI0MCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSJyZ2JhKDIwMSwxNjgsNzYsMC4xKSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9InRyYW5zcGFyZW50Ii8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI0MjAiIGZpbGw9InVybCgjYWJnMSkiLz4KICA8ZWxsaXBzZSBjeD0iNjAwIiBjeT0iMjEwIiByeD0iNDAwIiByeT0iMjAwIiBmaWxsPSJ1cmwoI2FiZzIpIi8+CiAgPCEtLSBTdGFyIGZpZWxkIC0tPgogIDxnIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjMiPgogICAgPGNpcmNsZSBjeD0iNTAiIGN5PSIzMCIgcj0iMSIvPjxjaXJjbGUgY3g9IjEyMCIgY3k9IjgwIiByPSIwLjgiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMCIgcj0iMS4yIi8+CiAgICA8Y2lyY2xlIGN4PSIzNTAiIGN5PSI2MCIgcj0iMC45Ii8+PGNpcmNsZSBjeD0iNTAwIiBjeT0iMTUiIHI9IjEiLz48Y2lyY2xlIGN4PSI2ODAiIGN5PSI0NSIgcj0iMC44Ii8+CiAgICA8Y2lyY2xlIGN4PSI4MDAiIGN5PSIyNSIgcj0iMS4xIi8+PGNpcmNsZSBjeD0iOTUwIiBjeT0iNzAiIHI9IjAuOSIvPjxjaXJjbGUgY3g9IjExMDAiIGN5PSIzMCIgcj0iMSIvPgogICAgPGNpcmNsZSBjeD0iODAiIGN5PSIxNTAiIHI9IjAuOCIvPjxjaXJjbGUgY3g9IjI1MCIgY3k9IjE4MCIgcj0iMSIvPjxjaXJjbGUgY3g9IjQyMCIgY3k9IjEzMCIgcj0iMC45Ii8+CiAgICA8Y2lyY2xlIGN4PSI3NTAiIGN5PSIxNjAiIHI9IjEiLz48Y2lyY2xlIGN4PSI5MDAiIGN5PSIxNDAiIHI9IjAuOCIvPjxjaXJjbGUgY3g9IjEwNTAiIGN5PSIxNzAiIHI9IjEuMSIvPgogICAgPGNpcmNsZSBjeD0iMTE1MCIgY3k9IjEwMCIgcj0iMC45Ii8+PGNpcmNsZSBjeD0iMzAiIGN5PSIyODAiIHI9IjEiLz48Y2lyY2xlIGN4PSIxODAiIGN5PSIzMDAiIHI9IjAuOCIvPgogICAgPGNpcmNsZSBjeD0iNDAwIiBjeT0iMzIwIiByPSIxLjIiLz48Y2lyY2xlIGN4PSI2MDAiIGN5PSIzODAiIHI9IjAuOSIvPjxjaXJjbGUgY3g9Ijg1MCIgY3k9IjM1MCIgcj0iMSIvPgogICAgPGNpcmNsZSBjeD0iMTAwMCIgY3k9IjMxMCIgcj0iMC44Ii8+PGNpcmNsZSBjeD0iMTE3MCIgY3k9IjI4MCIgcj0iMS4xIi8+CiAgPC9nPgogIDwhLS0gR29sZCBzdGFycyAtLT4KICA8ZyBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC42KSI+CiAgICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSI5MCIgcj0iMS41Ii8+PGNpcmNsZSBjeD0iNjAwIiBjeT0iNDAiIHI9IjEuOCIvPgogICAgPGNpcmNsZSBjeD0iOTAwIiBjeT0iMTAwIiByPSIxLjUiLz48Y2lyY2xlIGN4PSIxNTAiIGN5PSIzMzAiIHI9IjEuMyIvPgogICAgPGNpcmNsZSBjeD0iNzUwIiBjeT0iMzcwIiByPSIxLjYiLz48Y2lyY2xlIGN4PSIxMDUwIiBjeT0iMjUwIiByPSIxLjQiLz4KICA8L2c+CiAgPCEtLSBDZW50cmFsIG9yYiAtLT4KICA8Y2lyY2xlIGN4PSI2MDAiIGN5PSIyMTAiIHI9IjgwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjEyKSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iNjAwIiBjeT0iMjEwIiByPSI1NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDE1NSw3NywyMDIsMC4xNSkiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWRhc2hhcnJheT0iNSA4Ii8+CiAgPGNpcmNsZSBjeD0iNjAwIiBjeT0iMjEwIiByPSIzMCIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDQpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjI1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8Y2lyY2xlIGN4PSI2MDAiIGN5PSIyMTAiIHI9IjEyIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4xNSkiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuNSkiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjYwMCIgY3k9IjIxMCIgcj0iNCIgZmlsbD0icmdiYSgyNDAsMjA4LDEyOCwwLjk1KSIvPgogIDwhLS0gT3JiaXRpbmcgcmluZ3MgLS0+CiAgPGVsbGlwc2UgY3g9IjYwMCIgY3k9IjIxMCIgcng9IjEyMCIgcnk9IjQwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjA4KSIgc3Ryb2tlLXdpZHRoPSIxIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzAgNjAwIDIxMCkiLz4KICA8ZWxsaXBzZSBjeD0iNjAwIiBjeT0iMjEwIiByeD0iMTYwIiByeT0iNTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgxNTUsNzcsMjAyLDAuMDYpIiBzdHJva2Utd2lkdGg9IjEiIHRyYW5zZm9ybT0icm90YXRlKDIwIDYwMCAyMTApIi8+CiAgPCEtLSBEYXRhIGxpbmVzIGZyb20gb3JiIC0tPgogIDxnIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMTUpIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1kYXNoYXJyYXk9IjMgNiI+CiAgICA8bGluZSB4MT0iNjAwIiB5MT0iMTMwIiB4Mj0iNjAwIiB5Mj0iMzAiLz4KICAgIDxsaW5lIHgxPSI2NjkiIHkxPSIxNTAiIHgyPSI5MDAiIHkyPSI4MCIvPgogICAgPGxpbmUgeDE9IjY4MCIgeTE9IjIxMCIgeDI9IjExMDAiIHkyPSIyMTAiLz4KICAgIDxsaW5lIHgxPSI2NjkiIHkxPSIyNzAiIHgyPSI5MDAiIHkyPSIzNTAiLz4KICAgIDxsaW5lIHgxPSI2MDAiIHkxPSIyOTAiIHgyPSI2MDAiIHkyPSI0MDAiLz4KICAgIDxsaW5lIHgxPSI1MzEiIHkxPSIyNzAiIHgyPSIzMDAiIHkyPSIzNTAiLz4KICAgIDxsaW5lIHgxPSI1MjAiIHkxPSIyMTAiIHgyPSIxMDAiIHkyPSIyMTAiLz4KICAgIDxsaW5lIHgxPSI1MzEiIHkxPSIxNTAiIHgyPSIzMDAiIHkyPSI4MCIvPgogIDwvZz4KICA8IS0tIE5vZGUgZG90cyBhdCBsaW5lIGVuZHMgLS0+CiAgPGcgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuNSkiPgogICAgPGNpcmNsZSBjeD0iNjAwIiBjeT0iMzAiIHI9IjQiLz48Y2lyY2xlIGN4PSI5MDAiIGN5PSI4MCIgcj0iMyIvPgogICAgPGNpcmNsZSBjeD0iMTEwMCIgY3k9IjIxMCIgcj0iNCIvPjxjaXJjbGUgY3g9IjkwMCIgY3k9IjM1MCIgcj0iMyIvPgogICAgPGNpcmNsZSBjeD0iNjAwIiBjeT0iNDAwIiByPSI0Ii8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iMzUwIiByPSIzIi8+CiAgICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIyMTAiIHI9IjQiLz48Y2lyY2xlIGN4PSIzMDAiIGN5PSI4MCIgcj0iMyIvPgogIDwvZz4KICA8IS0tIENvcm5lciBkZWNvcmF0aW9ucyAtLT4KICA8dGV4dCB4PSI0MCIgeT0iMzk1IiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4zKSIgZm9udC1zaXplPSIxMCIgZm9udC1mYW1pbHk9InNlcmlmIiBsZXR0ZXItc3BhY2luZz0iNCI+w4ZUSEVSIMK3IENPTU1BTkQgQ0VOVFJFIMK3IEVTVC4gTU1YWElWPC90ZXh0PgogIDx0ZXh0IHg9IjkwMCIgeT0iMzk1IiBmaWxsPSJyZ2JhKDIwMCwxOTIsMTY4LDAuMikiIGZvbnQtc2l6ZT0iOSIgZm9udC1mYW1pbHk9InNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+MTRLKyBJTklUSUFURVMgwrcgNjArIFJFQUxNUyDCtyDiiJ4gVVBUSU1FPC90ZXh0Pgo8L3N2Zz4=" alt="Æther Command Centre">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="above">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <div class="eyebrow mb-2">Choose Your Covenant</div>
+                <h2 class="section-title-myth">Three Tiers of Power</h2>
+                <div class="ornament mt-3"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+                <p class="feature-text mx-auto mt-3">Select the path that matches the ambition of your enterprise.</p>
+            </div>
+            
+            <div class="row g-4 justify-content-center align-items-stretch">
+                <div class="col-md-6 col-lg-4 reveal d1">
+                    <div class="tier-card">
+                        <div class="tier-name">Seeker</div>
+                        <div class="tier-desc">For those who begin their journey alone.</div>
+                        <div class="tier-price"><sup>$</sup>0</div>
+                        <div class="tier-per">/ month</div>
+                        <div class="mt-4 mb-4">
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> 3 Artifact Integrations</div>
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> Basic Divination Dashboards</div>
+                            <div class="tier-feature"><i class="bi bi-x text-secondary me-2"></i> The Oracle AI</div>
+                            <div class="tier-feature"><i class="bi bi-x text-secondary me-2"></i> Priority Herald Support</div>
+                        </div>
+                        <button class="btn-ghost-myth d-flex w-100 mt-auto justify-content-center" data-bs-toggle="modal" data-bs-target="#authModal">Claim Path</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal d2">
+                    <div class="tier-card" style="border-color: rgba(201,168,76,.5); box-shadow: 0 0 30px rgba(201,168,76,.1);">
+                        <span class="tier-crown">⚜ Most Revered</span>
+                        <div class="tier-name">Ascended</div>
+                        <div class="tier-desc">For covens ready to bend fate.</div>
+                        <div class="tier-price" style="color:var(--gold-light);"><sup style="color:var(--gold);">$</sup>49</div>
+                        <div class="tier-per">/ month per initiate</div>
+                        <div class="mt-4 mb-4">
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> Unlimited Integrations</div>
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> Advanced Divination Dashboards</div>
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> The Oracle AI (1k Tokens)</div>
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> 4-Minute Herald Support</div>
+                        </div>
+                        <button class="btn-primary-myth d-flex w-100 mt-auto justify-content-center" data-bs-toggle="modal" data-bs-target="#authModal">Begin Trial</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal d3">
+                    <div class="tier-card">
+                        <div class="tier-name">Sovereign</div>
+                        <div class="tier-desc">For empires that refuse constraint.</div>
+                        <div class="tier-price" style="font-size: 2.2rem; padding-bottom: 0.6rem;">Custom</div>
+                        <div class="tier-per">speak with our council</div>
+                        <div class="mt-4 mb-4">
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> Dedicated Physical Server</div>
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> White-label Dashboards</div>
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> Unlimited Oracle AI</div>
+                            <div class="tier-feature"><i class="bi bi-check2 text-success me-2"></i> Dedicated Master Herald</div>
+                        </div>
+                        <button class="btn-ghost-myth d-flex w-100 mt-auto justify-content-center">Summon Council</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison" class="above">
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <div class="eyebrow mb-2">The Grand Ledger</div>
+                <h2 class="section-title-myth">Detailed Artifact Comparison</h2>
+                <p class="feature-text mt-3">A transparent breakdown of powers across all tiers.</p>
+            </div>
+            
+            <div class="table-responsive reveal d2" style="border-radius: 4px; border: 1px solid rgba(201,168,76,.2);">
+                <table class="table table-mythic mb-0">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">Power / Feature</th>
+                            <th style="width: 20%;">Seeker</th>
+                            <th style="width: 20%;">Ascended</th>
+                            <th style="width: 20%;">Sovereign</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Maximum Initiates (Users)</td>
+                            <td>3</td>
+                            <td>25</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Active Workflows</td>
+                            <td>5</td>
+                            <td>Unlimited</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Data Retention History</td>
+                            <td>30 Days</td>
+                            <td>1 Year</td>
+                            <td>Infinite</td>
+                        </tr>
+                        <tr>
+                            <td>Real-time Divination</td>
+                            <td><i class="bi bi-check-lg icon-yes"></i></td>
+                            <td><i class="bi bi-check-lg icon-yes"></i></td>
+                            <td><i class="bi bi-check-lg icon-yes"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Oracle AI Predictions</td>
+                            <td><i class="bi bi-dash icon-no"></i></td>
+                            <td><i class="bi bi-check-lg icon-yes"></i></td>
+                            <td><i class="bi bi-check-lg icon-yes"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Custom Arcane Domains (URLs)</td>
+                            <td><i class="bi bi-dash icon-no"></i></td>
+                            <td><i class="bi bi-check-lg icon-yes"></i></td>
+                            <td><i class="bi bi-check-lg icon-yes"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Dedicated Physical Server</td>
+                            <td><i class="bi bi-dash icon-no"></i></td>
+                            <td><i class="bi bi-dash icon-no"></i></td>
+                            <td><i class="bi bi-check-lg icon-yes"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="above">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5 reveal">
+                    <div class="eyebrow mb-2">Scrolls of Wisdom</div>
+                    <h2 class="section-title-myth mb-4">Frequently Asked Inquiries</h2>
+                    <p class="feature-text mb-4">Cannot find the answers you seek? Our heralds stand ready to assist you day and night. Contact the support coven for further enlightenment.</p>
+                    <a href="#footer" class="btn-ghost-myth">Contact Heralds</a>
+                </div>
+                
+                <div class="col-lg-7 reveal d2">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    How secure are the Arcane Wards protecting my data?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our wards are forged using AES-256 encryption at rest and TLS 1.3 in transit. We are fully SOC 2 Type II and ISO 27001 compliant, ensuring your artifacts are sealed from unauthorized entities.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Can I migrate my existing rituals from another platform?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Absolutely. The Convergence API allows for 1-click migration from over 50 traditional platforms. If you require manual assistance, our Sovereign tier includes dedicated migration heralds.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    What happens if I exceed my initiate limit?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Your covenant will not be disrupted. We apply a soft grace period allowing temporary overages. You will be notified via crow (email) to upgrade your tier at the next lunar cycle.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Is there a trial period for the Ascended tier?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, all new accounts are granted a 14-day trial of the Ascended tier. No tribute (credit card) is required to begin. You may revert to the free Seeker tier at any time before the trial ends.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         TESTIMONIALS
+    ================================================================ -->
+    <section id="testimonials" class="above" style="padding: 7rem 0; position: relative;">
+        <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);"></div>
+        <div class="container">
+            <div class="text-center mb-5 reveal">
+                <div class="eyebrow mb-2">Voices of the Initiated</div>
+                <h2 class="section-title-myth">The Covenant Speaks</h2>
+                <div class="ornament mt-3"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+            </div>
+
+            <!-- Testimonial banner image -->
+            <div class="reveal mb-5">
+                <div class="myth-img-frame ns-clickable" data-caption="✦ 14,000+ Initiates — The growing covenant of Æther" tabindex="0" role="button" style="height: 220px;">
+                    <div class="myth-img-overlay" style="background: linear-gradient(90deg, rgba(4,3,10,0.8) 0%, transparent 50%, rgba(4,3,10,0.6) 100%);"></div>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTIwMCAyMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InRiZzEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzA0MDMwYSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjIwJSIgc3RvcC1jb2xvcj0iIzFjMTczMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzEyMGYxZSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjgwJSIgc3RvcC1jb2xvcj0iIzFjMTczMCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwNDAzMGEiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjIyMCIgZmlsbD0idXJsKCN0YmcxKSIvPgogIDwhLS0gRGVjb3JhdGl2ZSBydW5lIGJvcmRlciB0b3AvYm90dG9tIC0tPgogIDxsaW5lIHgxPSI2MCIgeTE9IjE4IiB4Mj0iMTE0MCIgeTI9IjE4IiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjE1KSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz4KICA8bGluZSB4MT0iNjAiIHkxPSIyMDIiIHgyPSIxMTQwIiB5Mj0iMjAyIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjE1KSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz4KICA8IS0tIENvcm5lciBvcm5hbWVudHMgLS0+CiAgPHRleHQgeD0iMzAiIHk9IjI0IiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC40KSIgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9InNlcmlmIj7inYg8L3RleHQ+CiAgPHRleHQgeD0iMTE1NSIgeT0iMjQiIGZpbGw9InJnYmEoMjAxLDE2OCw3NiwwLjQpIiBmb250LXNpemU9IjE0IiBmb250LWZhbWlseT0ic2VyaWYiPuKdiDwvdGV4dD4KICA8dGV4dCB4PSIzMCIgeT0iMjEwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC40KSIgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9InNlcmlmIj7inYg8L3RleHQ+CiAgPHRleHQgeD0iMTE1NSIgeT0iMjEwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC40KSIgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9InNlcmlmIj7inYg8L3RleHQ+CiAgPCEtLSBMZWZ0IHN0YXQgLS0+CiAgPHRleHQgeD0iMjAwIiB5PSIxMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9InVybCgjdGJnMSkiIGZvbnQtc2l6ZT0iNDgiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPgogICAgPHRzcGFuIGZpbGw9InJnYmEoMjQwLDIwOCwxMjgsMC45NSkiPjE0Sys8L3RzcGFuPgogIDwvdGV4dD4KICA8dGV4dCB4PSIyMDAiIHk9IjEyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDAsMTkyLDE2OCwwLjUpIiBmb250LXNpemU9IjkiIGZvbnQtZmFtaWx5PSJzZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjQiPklOSVRJQVRFUzwvdGV4dD4KICA8IS0tIERpdmlkZXIgLS0+CiAgPGxpbmUgeDE9IjM1MCIgeTE9IjYwIiB4Mj0iMzUwIiB5Mj0iMTYwIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjEpIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8IS0tIENlbnRlciBzdGF0IC0tPgogIDx0ZXh0IHg9IjYwMCIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDI0MCwyMDgsMTI4LDAuOTUpIiBmb250LXNpemU9IjQ4IiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtd2VpZ2h0PSJib2xkIj40Ljkg4piFPC90ZXh0PgogIDx0ZXh0IHg9IjYwMCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDIwMCwxOTIsMTY4LDAuNSkiIGZvbnQtc2l6ZT0iOSIgZm9udC1mYW1pbHk9InNlcmlmIiBsZXR0ZXItc3BhY2luZz0iNCI+T1JBQ0xFIFJBVElORzwvdGV4dD4KICA8IS0tIERpdmlkZXIgLS0+CiAgPGxpbmUgeDE9Ijg1MCIgeTE9IjYwIiB4Mj0iODUwIiB5Mj0iMTYwIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjEpIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8IS0tIFJpZ2h0IHN0YXQgLS0+CiAgPHRleHQgeD0iMTAwMCIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDI0MCwyMDgsMTI4LDAuOTUpIiBmb250LXNpemU9IjQ4IiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtd2VpZ2h0PSJib2xkIj42MCs8L3RleHQ+CiAgPHRleHQgeD0iMTAwMCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDIwMCwxOTIsMTY4LDAuNSkiIGZvbnQtc2l6ZT0iOSIgZm9udC1mYW1pbHk9InNlcmlmIiBsZXR0ZXItc3BhY2luZz0iNCI+UkVBTE1TIFNFUlZFRDwvdGV4dD4KICA8IS0tIFN1YnRpdGxlIC0tPgogIDx0ZXh0IHg9IjYwMCIgeT0iMTc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJyZ2JhKDIwMCwxOTIsMTY4LDAuMykiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zdHlsZT0iaXRhbGljIiBsZXR0ZXItc3BhY2luZz0iMiI+Vm9pY2VzIG9mIHRoZSBJbml0aWF0ZWQg4oCUIFRoZSBDb3ZlbmFudCBTcGVha3M8L3RleHQ+Cjwvc3ZnPg==" alt="Team collaboration" class="myth-img" style="height:220px;object-fit:cover;">
+
+                </div>
+            </div>
+
+            <!-- Testimonial cards -->
+            <div class="testi-strip">
+                <div class="testi-card reveal d1">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-quote">"Æther didn't just give us data — it gave us foresight. Our revenue grew 40% in three moons after adopting The Oracle."</p>
+                    <div class="d-flex align-items-center">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzNhMzAyMCIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSI0NSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMTUpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjMpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMiIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDgpIi8+CiAgPHRleHQgeD0iMTAwIiB5PSI5MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPk1BPC90ZXh0PgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxNzUiIHJ4PSI1NSIgcnk9IjQwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4wOCkiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMikiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=" alt="Marcus" class="testi-avatar">
+                        <div>
+                            <div class="testi-name">Marcus Aldren</div>
+                            <div class="testi-role">Chief Revenue Oracle, Nexus Corp</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal d2">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-quote">"The Ward's security is unmatched. Our compliance team finally sleeps soundly knowing every scroll is sealed under AES-256."</p>
+                    <div class="d-flex align-items-center">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzJhMWYzOCIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSI0NSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMTUpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjMpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMiIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDgpIi8+CiAgPHRleHQgeD0iMTAwIiB5PSI5MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkxWPC90ZXh0PgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxNzUiIHJ4PSI1NSIgcnk9IjQwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4wOCkiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMikiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=" alt="Lyra" class="testi-avatar">
+                        <div>
+                            <div class="testi-name">Lyra Vesper</div>
+                            <div class="testi-role">Head of Security, Vaulted Systems</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card reveal d3">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-quote">"Switching to Æther was the Summoning our team needed. 200+ tools, one covenant. The Eternal Loop handles what once required three heralds."</p>
+                    <div class="d-flex align-items-center">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzFhMmEzYSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSI0NSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMTUpIiBzdHJva2U9InJnYmEoMjAxLDE2OCw3NiwwLjMpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMiIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuMDgpIi8+CiAgPHRleHQgeD0iMTAwIiB5PSI5MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0icmdiYSgyMDEsMTY4LDc2LDAuOSkiIGZvbnQtc2l6ZT0iMjgiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPk9CPC90ZXh0PgogIDxlbGxpcHNlIGN4PSIxMDAiIGN5PSIxNzUiIHJ4PSI1NSIgcnk9IjQwIiBmaWxsPSJyZ2JhKDIwMSwxNjgsNzYsMC4wOCkiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMikiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY4LDc2LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=" alt="Owen" class="testi-avatar">
+                        <div>
+                            <div class="testi-name">Owen Blackthorn</div>
+                            <div class="testi-role">CTO, Ember Analytics</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="cta" class="above">
+        <div class="container text-center position-relative">
+            <div class="reveal">
+                <div class="cta-seal"><i class="bi bi-stars"></i></div>
+                <div class="eyebrow mb-3">Your fate awaits</div>
+                <h2 class="cta-title">The Threshold Stands<br><span class="gold-text">Open Before You</span></h2>
+                <p class="cta-subtitle">Join the 14,000+ initiates shaping the future.</p>
+                <div class="d-flex justify-content-center flex-wrap gap-3 mb-4 mt-4">
+                    <button type="button" class="btn-primary-myth" data-bs-toggle="modal" data-bs-target="#authModal" style="font-size: .85rem; padding: 1.2rem 3rem;">
+                        Get Started
+                    </button>
+                </div>
+                <p class="feature-text mt-3" style="font-size: .8rem;">No tribute required • 14 days freely given • Withdraw at any moon</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer" class="above">
+        <div class="container pt-4">
+            <div class="row g-5 pb-5">
+                
+                <div class="col-lg-4 col-md-12 pe-lg-5">
+                    <span class="footer-brand">Æther</span>
+                    <p class="feature-text mb-4" style="font-size: 0.95rem; line-height: 1.6;">
+                        The all-in-one platform for ambitious teams. Build, launch, and grow — without the friction.
+                    </p>
+                    <div class="d-flex flex-column gap-2" style="width: max-content;">
+                        <a href="#" class="social-myth"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-myth"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-myth"><i class="bi bi-github"></i></a>
+                        <a href="#" class="social-myth"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-myth"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="footer-title">Product</div>
+                    <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+                        <li><a href="#features" class="footer-link">Features</a></li>
+                        <li><a href="#pricing" class="footer-link">Pricing</a></li>
+                        <li><a href="#" class="footer-link">Changelog</a></li>
+                        <li><a href="#" class="footer-link">Roadmap</a></li>
+                        <li><a href="#" class="footer-link">Status</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="footer-title">Company</div>
+                    <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+                        <li><a href="#about" class="footer-link">About</a></li>
+                        <li><a href="#team" class="footer-link">Team</a></li>
+                        <li><a href="#" class="footer-link">Blog</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="#" class="footer-link">Press Kit</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="footer-title">Resources</div>
+                    <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+                        <li><a href="#" class="footer-link">Documentation</a></li>
+                        <li><a href="#" class="footer-link">API Reference</a></li>
+                        <li><a href="#" class="footer-link">Tutorials</a></li>
+                        <li><a href="#" class="footer-link">Community</a></li>
+                        <li><a href="#integrations" class="footer-link">Integrations</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="footer-title">Legal</div>
+                    <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+                        <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="#" class="footer-link">Terms of Service</a></li>
+                        <li><a href="#" class="footer-link">Cookie Policy</a></li>
+                        <li><a href="#" class="footer-link">GDPR</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+
+            <div class="pt-4 border-top border-secondary border-opacity-25 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <span class="feature-text" style="font-size: 0.85rem;">© 2026 Æther Inc. All rights reserved.</span>
+                <span class="feature-text" style="font-size: 0.85rem;">Crafted with <span class="text-danger">♥</span> in San Francisco</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content auth-modal" style="z-index: 1060;">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Close" style="cursor: none; z-index: 1070; position: relative;"></button>
+                </div>
+                <div class="modal-body px-4 px-sm-5 pb-5 pt-0">
+                    
+                    <h5 class="modal-title mb-4" id="authModalLabel">Enter the Sanctum</h5>
+                    
+                    <ul class="nav nav-pills auth-tabs justify-content-center" id="authTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-pane" type="button" role="tab" aria-controls="login-pane" aria-selected="true">Login</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register-pane" type="button" role="tab" aria-controls="register-pane" aria-selected="false">Register</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content mt-4" id="authTabContent">
+                        
+                        <div class="tab-pane fade show active" id="login-pane" role="tabpanel" aria-labelledby="login-tab">
+                            <form id="loginForm" novalidate>
+                                <button type="button" class="btn btn-google w-100 mb-3 d-flex align-items-center justify-content-center gap-2">
+                                    <i class="bi bi-google fs-5"></i> Continue with Google
+                                </button>
+                                
+                                <div class="auth-divider">or use scroll address</div>
+                                
+                                <div class="mb-3 position-relative">
+                                    <input type="email" class="form-control myth-input" id="loginEmail" placeholder="Scroll Address (Email)" required>
+                                    <div class="invalid-feedback" style="position: absolute; font-size: 0.7rem; color: var(--ember);">Email required.</div>
+                                </div>
+                                <div class="mb-4 position-relative">
+                                    <input type="password" class="form-control myth-input" id="loginPassword" placeholder="Secret Key (Password)" required>
+                                </div>
+                                <button type="submit" class="btn-primary-myth w-100 border-0">Commence Ritual</button>
+                                <div class="text-center mt-3">
+                                    <a href="#" class="text-muted small" style="text-decoration:none; transition: color .3s; cursor: none;">Forgotten your key?</a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="register-pane" role="tabpanel" aria-labelledby="register-tab">
+                            <form id="registerForm" novalidate>
+                                <button type="button" class="btn btn-google w-100 mb-3 d-flex align-items-center justify-content-center gap-2">
+                                    <i class="bi bi-google fs-5"></i> Sign up with Google
+                                </button>
+                                
+                                <div class="auth-divider">or create with email</div>
+
+                                <div class="mb-3">
+                                    <input type="text" class="form-control myth-input" id="regName" placeholder="Initiate Name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control myth-input" id="regEmail" placeholder="Scroll Address (Email)" required>
+                                </div>
+                                <div class="mb-4">
+                                    <input type="password" class="form-control myth-input" id="regPassword" placeholder="Forge a Secret Key" minlength="8" required>
+                                    <div class="form-text mt-1 text-muted" style="font-size: 0.7rem;">Key must be at least 8 runes long.</div>
+                                </div>
+                                <button type="submit" class="btn-primary-myth w-100 border-0">Join the Covenant</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- ================================================================
+     LIGHTBOX MODAL
+================================================================ -->
+<div id="ns-lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div id="ns-lightbox-inner">
+    <button id="ns-lightbox-prev" aria-label="Previous">&#8592;</button>
+    <button id="ns-lightbox-next" aria-label="Next">&#8594;</button>
+    <button id="ns-lightbox-close" aria-label="Close">&#10005;</button>
+    <div id="ns-lightbox-svg"></div>
+    <div id="ns-lightbox-caption"></div>
+    <div id="ns-lightbox-nav"></div>
+  </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        /**
+         * 1. THEME TOGGLE LOGIC
+         * Handles switching between Dark Mode (Void) and Light Mode (Parchment).
+         * Swaps the root data-theme attribute which CSS responds to.
+         */
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlEl = document.documentElement;
+        let isLightMode = false;
+
+        themeToggle.addEventListener('click', () => {
+            isLightMode = !isLightMode;
+            if (isLightMode) {
+                // Switch to light mode
+                htmlEl.setAttribute('data-theme', 'light');
+                themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
+            } else {
+                // Switch to dark mode
+                htmlEl.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+            }
+        });
+
+        /**
+         * 2. CUSTOM CURSOR LOGIC
+         * Tracks mouse movement to render the glowing orb and delayed ring.
+         */
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursor-ring');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+
+        // Track raw mouse coordinates
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; 
+            my = e.clientY;
+            cursor.style.left = mx + 'px'; 
+            cursor.style.top = my + 'px';
+        });
+
+        // Easing function for the trailing ring
+        function animRing() {
+            rx += (mx - rx) * 0.12; 
+            ry += (my - ry) * 0.12;
+            ring.style.left = rx + 'px'; 
+            ring.style.top = ry + 'px';
+            requestAnimationFrame(animRing);
+        }
+        animRing();
+
+        // Bind cursor hover expansion effect to interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, input, .feature-card, .mega-item, .nav-link, .btn-close, .integration-card, .accordion-button');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => { 
+                cursor.style.transform = 'translate(-50%,-50%) scale(2.5)'; 
+                ring.style.opacity = '0.2'; 
+            });
+            el.addEventListener('mouseleave', () => { 
+                cursor.style.transform = 'translate(-50%,-50%) scale(1)'; 
+                ring.style.opacity = '0.5'; 
+            });
+        });
+
+        /**
+         * 3. PARTICLE COSMOS LOGIC (Advanced version)
+         * Renders floating particles that react to Light/Dark mode.
+         */
+        const canvas = document.getElementById('cosmos');
+        const ctx = canvas.getContext('2d');
+        let W, H, stars = [];
+
+        // Handle canvas resizing
+        function resize() { 
+            W = canvas.width = window.innerWidth; 
+            H = canvas.height = window.innerHeight; 
+        }
+        resize(); 
+        window.addEventListener('resize', resize);
+
+        // Generate initial stars array
+        for (let i = 0; i < 180; i++) {
+            stars.push({
+                x: Math.random() * window.innerWidth, 
+                y: Math.random() * window.innerHeight,
+                r: Math.random() * 1.2 + 0.2, 
+                a: Math.random(), 
+                sp: Math.random() * 0.004 + 0.001,
+                // Assign color type based on random probability
+                col: Math.random() > 0.7 ? '#c9a84c' : '#ffffff'
+            });
+        }
+
+        // Draw loop
+        function drawCosmos() {
+            ctx.clearRect(0, 0, W, H);
+            
+            ctx.shadowBlur = 15; 
+            ctx.shadowColor = '#c9a84c'; 
+
+            stars.forEach(s => {
+                s.a += s.sp; // Update alpha via sine wave for twinkling
+                const alpha = (Math.sin(s.a) + 1) / 2 * 0.6 + 0.1;
+                
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                
+                // Color switching logic based on theme state
+                if (s.col === '#c9a84c') {
+                    ctx.fillStyle = `rgba(201, 168, 76, ${alpha * 1.0})`; 
+                } else {
+                    // White stars turn dark brown in light mode so they are visible
+                    ctx.fillStyle = isLightMode ? `rgba(58, 50, 38, ${alpha * 0.5})` : `rgba(255, 255, 255, ${alpha * 0.4})`;
+                }
+                ctx.fill();
+            });
+
+            ctx.shadowBlur = 0; 
+
+            requestAnimationFrame(drawCosmos);
+        }
+        drawCosmos();
+
+        /**
+         * 4. SCROLL REVEAL & NAVBAR OBSERVERS
+         * Adds 'lit' class to navbar on scroll, triggers CSS animations for elements in view.
+         */
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => { 
+            nav.classList.toggle('lit', window.scrollY > 60); 
+        });
+
+        // Intersection Observer for scroll animations
+        const reveals = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { 
+                if (e.isIntersecting) { 
+                    e.target.classList.add('visible'); 
+                    obs.unobserve(e.target); // Trigger only once
+                } 
+            });
+        }, { threshold: 0.1 });
+        
+        reveals.forEach(el => obs.observe(el));
+
+        /**
+         * 5. FORM VALIDATION LOGIC
+         * Basic dummy validation to close the modal elegantly upon submission.
+         */
+        const loginForm = document.getElementById('loginForm');
+        const regForm = document.getElementById('registerForm');
+        const authModalEl = document.getElementById('authModal');
+        const authModalObj = new bootstrap.Modal(authModalEl); // Get bootstrap instance
+
+        // Helper function to mock server process
+        function handleFormSubmit(event, formElement) {
+            event.preventDefault(); // Prevent page reload
+            
+            if (!formElement.checkValidity()) {
+                event.stopPropagation();
+                formElement.classList.add('was-validated');
+                return;
+            }
+
+            // If valid, show loading state on button
+            const btn = formElement.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Casting...';
+            btn.disabled = true;
+
+            // Fake API Call delay
+            setTimeout(() => {
+                // Hide modal manually
+                let bsModal = bootstrap.Modal.getInstance(authModalEl);
+                bsModal.hide();
+                
+                // Reset form state
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                formElement.reset();
+                formElement.classList.remove('was-validated');
+            }, 1000);
+        }
+
+        loginForm.addEventListener('submit', (e) => handleFormSubmit(e, loginForm));
+        regForm.addEventListener('submit', (e) => handleFormSubmit(e, regForm));
+
+        /* ================================================================
+   LIGHTBOX — CLICKABLE IMAGES
+================================================================ */
+(function(){
+  // Collect all clickable SVG wrappers after DOM is ready
+  const registry = []; // {svg: svgHTML, caption: string}
+
+  function buildRegistry(){
+    document.querySelectorAll('.ns-clickable[data-caption]').forEach(el=>{
+      const svgEl = el.querySelector('svg');
+      if(!svgEl) return;
+      registry.push({
+        html: svgEl.outerHTML,
+        caption: el.dataset.caption || ''
+      });
+      el.dataset.lbIndex = registry.length - 1;
+    });
+  }
+
+  let currentIdx = 0;
+
+  function openLightbox(idx){
+    currentIdx = idx;
+    const lb     = document.getElementById('ns-lightbox');
+    const svgBox = document.getElementById('ns-lightbox-svg');
+    const cap    = document.getElementById('ns-lightbox-caption');
+    const nav    = document.getElementById('ns-lightbox-nav');
+    if(!lb || !registry[idx]) return;
+
+    svgBox.innerHTML = registry[idx].html;
+    cap.textContent  = registry[idx].caption;
+
+    // dots
+    nav.innerHTML = '';
+    registry.forEach((_,i)=>{
+      const dot = document.createElement('button');
+      dot.className = 'lb-nav-dot' + (i===idx ? ' active' : '');
+      dot.addEventListener('click', ()=> openLightbox(i));
+      nav.appendChild(dot);
+    });
+
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(){
+    const lb = document.getElementById('ns-lightbox');
+    if(lb) lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function navigate(dir){
+    const next = (currentIdx + dir + registry.length) % registry.length;
+    openLightbox(next);
+  }
+
+  window.addEventListener('DOMContentLoaded', function(){
+    buildRegistry();
+
+    // Click on any .ns-clickable
+    document.querySelectorAll('.ns-clickable').forEach(el=>{
+      el.addEventListener('click', function(){
+        const idx = parseInt(this.dataset.lbIndex);
+        if(!isNaN(idx)) openLightbox(idx);
+      });
+    });
+
+    // Close button
+    const closeBtn = document.getElementById('ns-lightbox-close');
+    if(closeBtn) closeBtn.addEventListener('click', closeLightbox);
+
+    // Click backdrop to close
+    const lb = document.getElementById('ns-lightbox');
+    if(lb) lb.addEventListener('click', function(e){
+      if(e.target === lb) closeLightbox();
+    });
+
+    // Prev / Next buttons
+    const prev = document.getElementById('ns-lightbox-prev');
+    const next = document.getElementById('ns-lightbox-next');
+    if(prev) prev.addEventListener('click', ()=> navigate(-1));
+    if(next) next.addEventListener('click', ()=> navigate(1));
+
+    // Keyboard support
+    document.addEventListener('keydown', function(e){
+      const lb = document.getElementById('ns-lightbox');
+      if(!lb || !lb.classList.contains('open')) return;
+      if(e.key === 'Escape')     closeLightbox();
+      if(e.key === 'ArrowLeft')  navigate(-1);
+      if(e.key === 'ArrowRight') navigate(1);
+    });
+  });
+})();
+
+    </script>
+</body>
+</html>
